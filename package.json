@@ -1,0 +1,12 @@
+{
+  "name": "projector-playground",
+  "version": "1.0.0",
+  "description": "multi-user virtual reality using projector and HTC Vive",
+  "scripts": {
+    "start": "node ./server/easyrtc-server.js"
+  },
+  "author": "Kieran Farr",
+  "dependencies": {
+    "networked-aframe": "^0.6.1"
+  }
+}
