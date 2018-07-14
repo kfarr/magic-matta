@@ -16,12 +16,10 @@ Experiments to create a "magic carpet" type of experience in WebXR using A-Frame
 
 ## Hardware setup instructions
 * First choose an area within the HTC Vive lighthouse tracker boundaries for the projector:
-<img src="./docs/projector-placement-topdown.png" />
-Top-down view: red represents the area of the projected screen. Screen can be anywhere within the lighthouse tracker bounds. It can be any dimensions (portrait or landscape aspect ratio) but make sure it is at a right angle to the lighthouse tracker bounds.
+<img src="./docs/projector-placement-topdown.png" /> Top-down view: red represents the area of the projected screen. Screen can be anywhere within the lighthouse tracker bounds. It can be any dimensions (portrait or landscape aspect ratio) but make sure it is at a right angle to the lighthouse tracker bounds.
 
 * Mount the projector approx 1.5m off the floor facing down. Most projectors include a 1/4" tripod mount thread (female), you can get clamps with a 1/4" thread (male) to easily mount a mini projector on a table, attach to shelves, etc.
-<img src="./docs/projector-placement-side.jpg" />
-Side view: suggested mounting heigh of 1.5m, depends on your projector's optics and desired screen size.
+<img src="./docs/projector-placement-side.jpg" /> Side view: suggested mounting heigh of 1.5m, depends on your projector's optics and desired screen size.
 
 * For recommendations on projector and mounting equipment, <a href="https://github.com/chaimgingold/Tabla/#recommended-camera-and-projector">see instructions from La Tabla, another cool projector based XR project</a>
 
@@ -37,3 +35,4 @@ Side view: suggested mounting heigh of 1.5m, depends on your projector's optics 
 * feature multiple minigames, switch by shaking controller
 * drawing feature (like babypi), start drawing when controller is pointed up like a pen (small end down)
 * Vive tracker support for more inputs
+* physics minigames (see simple boilerplate project https://glitch.com/edit/#!/boiling-alligator?path=index.html:27:10)
