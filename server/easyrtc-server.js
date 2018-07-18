@@ -76,5 +76,14 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 
 //listen on port
 webServer.listen(port, function () {
-  console.log('listening on http://localhost:' + port);
+  // console.log('listening on http://localhost:' + port);
 });
+
+var opn = require('opn');
+
+require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+  console.log('Listening on "http://' + add + ':' + port + '"');
+  // opens the url in the default browser
+  console.log('Opening in default browser');
+  opn('http://' + add + ':' + port);
+})
