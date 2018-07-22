@@ -1,8 +1,12 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Dev Example — Networked-Aframe</title>
-    <meta name="description" content="Dev Example — Networked-Aframe">
+    <title>A-Frame Matta</title>
+    <meta name="description" content="A-Frame Matta">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
@@ -17,17 +21,30 @@
     <style>
 
         .vivewand-ne {
-          z-index: 1;
+          z-index: 2;
           position: absolute;
           top: 0px;
           right: 0px;
         }
 
         .vivewand-sw {
-          z-index: 1;
+          z-index: 2;
           position: absolute;
           bottom: 0px;
           left: 0px;
+        }
+
+        .wizard {
+          z-index: 5;
+          border-radius: 10px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          padding: 1.5em;
+          color: #FFF;
+          background: rgba(0, 0, 0, 0.75);
+          font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
         }
 
         </style>
@@ -36,8 +53,8 @@
 
   <script>
 
-  // define a new component called "average-controller"
-  AFRAME.registerComponent('average-controller', {
+  // define a new component called "calibration-box"
+  AFRAME.registerComponent('calibration-box', {
     init: function () {
       console.log('Hello, World!');
     },
@@ -80,7 +97,9 @@
 
   });
 
-
+  function grab() {
+    console.log({ document.getElementById("calibration-box").getAttribute("position") });
+  }
 
   </script>
 
@@ -182,7 +201,7 @@
         <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;"></a-entity>
       </a-entity>
 
-      <a-entity position="0 0 0" geometry="box" color="red" average-controller></a-entity>
+      <a-entity id="calibration-box" position="0 0 0" geometry="box" color="red" calibration-box></a-entity>
 
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
@@ -199,9 +218,22 @@
       <img src="./img/vive-topdown-NE.png"/>
     </div>
 
+    <div class="wizard content">
+      <h1 class="title has-text-white">Step 1</h1>
+      <p><a class="has-text-primary" href="">Follow setup instructions to get projector and HTC Vive server running.</a>
+        Put wands on both sides of screen as marked.
+        A rectangle will just fill the screen.
+        Click next to adjust VR camera to match real world projector.</p>
+
+        <p><a href="#" class="button is-primary">Next</a></p>
+
+    </div>
+
     <div class="vivewand-sw">
       <img src="./img/vive-topdown-sw.png"/>
     </div>
+
+
 
     <script>
       // On mobile remove elements that are resource heavy
