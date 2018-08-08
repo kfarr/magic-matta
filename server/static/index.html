@@ -11,7 +11,7 @@
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
-    <script src="/build.js"></script>
+    <!-- <script src="/build.js"></script> -->
     <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
 
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
@@ -71,7 +71,8 @@
 
     // on each tick, get the position of the controllers
     tick: function (time, timeDelta) {
-      // instead, if world state calibrating = true
+      // TODO: only run this code in "calibration mode"
+      // TODO: init these vars in init function, not on each tick
       if (document.querySelectorAll(".left-controls").length > 0 && document.querySelectorAll(".right-controls").length > 0) {
         var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
         var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
@@ -79,37 +80,58 @@
         var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
         var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
         var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
-
         var centerX = (leftX + rightX) / 2
         var centerY = (leftY + rightY) / 2
         var centerZ = (leftZ + rightZ) / 2
-
         var dimensionX = Math.abs(leftX - rightX);
         var dimensionY = Math.abs(leftY - rightY);
         var dimensionZ = Math.abs(leftZ - rightZ);
-
-//        console.log(`centerX: ${centerX}; centerZ: ${centerZ}`);
-//        console.log(this.el.setAttribute("position","x", centerX));
-
-//        ratio of rectangle width and depth
-//        document.objects
-
+       // console.log(`centerX: ${centerX}; centerZ: ${centerZ}`);
+       // console.log(this.el.setAttribute("position","x", centerX));
+       // ratio of rectangle width and depth
         this.el.setAttribute("position", `${centerX} ${centerY} ${centerZ}`);
-        this.el.setAttribute("geometry","height", dimensionY);
-        this.el.setAttribute("geometry","width", dimensionX);
-        this.el.setAttribute("geometry","depth", dimensionZ);
-//        this.el.setAttribute("rotation", ``)
-
+        this.el.setAttribute("geometry", "height", dimensionY);
+        this.el.setAttribute("geometry", "width", dimensionX);
+        this.el.setAttribute("geometry", "depth", dimensionZ);
       }
-      // use function to find the average position between two positions and return a value of the same type
-      // update this box (this entity) with the positions
     }
-
   });
 
-  function grab() {
-    console.log({ document.getElementById("calibration-box").getAttribute("position") });
+  function centerCamera() {
+    var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
+    var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
+    var leftZ = document.querySelectorAll(".left-controls")[0].getAttribute("position").z
+    var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
+    var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
+    var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
+
+    var centerX = (leftX + rightX) / 2
+    var centerY = (leftY + rightY) / 2
+    var centerZ = (leftZ + rightZ) / 2
+
+    var dimensionX = Math.abs(leftX - rightX);
+    var dimensionY = Math.abs(leftY - rightY);
+    var dimensionZ = Math.abs(leftZ - rightZ);
+
+    var playerEl = document.getElementById("player")
+    playerEl.setAttribute("position", `${centerX} ${centerY + 2} ${centerZ}`);
+    playerEl.setAttribute("rotation", "-90 0 0");
   }
+
+  function rotatePlayer() {
+    var playerEl = document.getElementById("player")
+    playerEl.setAttribute("rotation", "-90 180 0");
+  }
+
+  // TODO: calculate rotation based off of aspect ratio of viewport
+  // Length of hypotenuse is distance between controllers
+  // a^2 + b^2 = c^2
+  // we know c (in VR meters)
+  // a = viewport width (in screen pixels)
+  // b = viewport height (in screen pixels)
+  // we know the aspect ratio of a:b, such as 16:9
+  // how to calculate a and b in VR meters?
+  // how to derive rotation of calibration box based on this?
 
   </script>
 
@@ -211,7 +233,7 @@
         <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;"></a-entity>
       </a-entity>
 
-      <a-entity position="0 0 0" geometry="box" color="red" calibration-box></a-entity>
+      <a-entity id="calibration-box" position="0 0 0" geometry="primitive: box; width: 1; height: 1; depth: 1" color="red" calibration-box></a-entity>
 
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
