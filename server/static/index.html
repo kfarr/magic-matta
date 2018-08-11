@@ -20,7 +20,7 @@
 
     <style>
 
-        .vivewand-ne {
+        /* .vivewand-ne {
           z-index: 2;
           position: absolute;
           top: 0px;
@@ -42,7 +42,7 @@
           max-height:50vmin;
           width: auto;
           height: auto;
-        }
+        } */
 
         .wizard {
           z-index: 5;
@@ -216,9 +216,7 @@
           </a-entity>
         </template>
 
-
-
-        <!-- /Templates -->
+      <!-- /Templates -->
       </a-assets>
 
       <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" wasd-controls>
@@ -230,10 +228,17 @@
         </a-entity>
 
         <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;"></a-entity>
+        <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+          <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="-126 -180 0">
+            <a-entity id="projector1" projector="Optoma ML750ST">
+              <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
+              <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
+            </a-entity>
+          </a-entity>
+        </a-entity>
       </a-entity>
 
-      <a-entity id="calibration-box" position="0 0 0" geometry="primitive: box; width: 1; height: 1; depth: 1" color="red" calibration-box></a-entity>
+      <!-- <a-entity id="calibration-box" position="0 0 0" geometry="primitive: box; width: 1; height: 1; depth: 1" color="red" calibration-box></a-entity> -->
 
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
@@ -246,24 +251,20 @@
       <a-entity id="particles" particle-system="preset: snow"></a-entity>
     </a-scene>
 
-    <div class="vivewand-ne">
+    <!-- <div class="vivewand-ne">
       <img src="./img/vive-topdown-NE2.png">
-    </div>
+    </div> -->
 
     <div class="wizard content">
-      <h1 class="title has-text-white">Step 1</h1>
-      <p><a class="has-text-primary" href="">Follow setup instructions to get projector and HTC Vive server running.</a>
-        Put wands on both sides of screen as marked.
-        A rectangle will just fill the screen.
-        Click next to adjust VR camera to match real world projector.</p>
-
-        <p><a href="#" class="button is-primary">Next</a></p>
-
+      <h1 class="title has-text-white">Locate Your Projector</h1>
+      <p><a class="has-text-primary" href="">Follow setup instructions to get projector and HTC Vive server running.</a></p>
+        <p>Place the right HTC Vive controller against the projector pointing down and press the trigger button. Use the VR headset to align the virtual projector to match the real life projector.</p>
+        <p><a href="#" class="button is-primary">This button doesn't do anything yet.</a></p>
     </div>
 
-    <div class="vivewand-sw">
+    <!-- <div class="vivewand-sw">
       <img src="./img/vive-topdown-SW2.png"/>
-    </div>
+    </div> -->
 
 
 
