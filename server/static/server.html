@@ -36,65 +36,69 @@
   </head>
 
   <script>
-  // define a new component called "calibration-box"
-  AFRAME.registerComponent('projector1-position', {
-    init: function () {
-      console.log('Hello, World!');
+
+
+  AFRAME.registerComponent('spawn-projector', {
+    schema: {
+      projectorTemplate: {default: '#projector-template'},
+      projectorClass: {default: '#projector1'},
+      triggerKeyCode: {default: 32} // spacebar
     },
 
-    // on each tick, get the position of the controllers
-    tick: function (time, timeDelta) {
-      // TODO: only run this code in "calibration mode"
-      // TODO: init these vars in init function, not on each tick
-      if (document.querySelectorAll(".left-controls").length > 0 && document.querySelectorAll(".right-controls").length > 0) {
-        var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
-        var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
-        var leftZ = document.querySelectorAll(".left-controls")[0].getAttribute("position").z
-        var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
-        var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
-        var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
-        var centerX = (leftX + rightX) / 2
-        var centerY = (leftY + rightY) / 2
-        var centerZ = (leftZ + rightZ) / 2
-        var dimensionX = Math.abs(leftX - rightX);
-        var dimensionY = Math.abs(leftY - rightY);
-        var dimensionZ = Math.abs(leftZ - rightZ);
-       // console.log(`centerX: ${centerX}; centerZ: ${centerZ}`);
-       // console.log(this.el.setAttribute("position","x", centerX));
-       // ratio of rectangle width and depth
-        this.el.setAttribute("position", `${centerX} ${centerY} ${centerZ}`);
-        this.el.setAttribute("geometry", "height", dimensionY);
-        this.el.setAttribute("geometry", "width", dimensionX);
-        this.el.setAttribute("geometry", "depth", dimensionZ);
+    init: function() {
+      var that = this;
+      document.body.onkeyup = function(e){
+        if(e.keyCode == that.data.triggerKeyCode){
+          that.shoot();
+        }
       }
+    },
+
+    shoot: function() {
+      this.createBullet();
+    },
+
+    createBullet: function() {
+      var el = document.createElement('a-entity');
+      el.setAttribute('networked', 'template:' + this.data.projectorTemplate);
+      // el.setAttribute('remove-in-seconds', 3);
+      // el.setAttribute('forward', 'speed:0.3');
+
+//      var thisEl = this.el;
+      var thisEl = document.getElementById("projector-preview");
+      el.setAttribute('position', this.getInitialPosition(thisEl));
+      el.setAttribute('rotation', this.getInitialRotation(thisEl));
+
+      var scene = document.querySelector('a-scene');
+      scene.appendChild(el);
+    },
+
+    getInitialPosition: function(spawnerEl) {
+      var worldPos = new THREE.Vector3();
+      worldPos.setFromMatrixPosition(spawnerEl.object3D.matrixWorld);
+      return worldPos;
+    },
+
+    getInitialRotation: function(spawnerEl) {
+      var worldDirection = new THREE.Vector3();
+
+      spawnerEl.object3D.getWorldDirection(worldDirection);
+      worldDirection.multiplyScalar(-1);
+      this.vec3RadToDeg(worldDirection);
+
+      worldDirection = spawnerEl.object3D.getWorldDirection(worldDirection);
+      worldDirection.multiplyScalar(-1);
+      this.vec3RadToDeg(worldDirection);
+
+      return worldDirection;
+    },
+
+    vec3RadToDeg: function(rad) {
+      rad.set(rad.y * 90, -90 + (-THREE.Math.radToDeg(Math.atan2(rad.z, rad.x))), 0);
     }
   });
 
-  function centerCamera() {
-    var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
-    var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
-    var leftZ = document.querySelectorAll(".left-controls")[0].getAttribute("position").z
-    var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
-    var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
-    var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
 
-    var centerX = (leftX + rightX) / 2
-    var centerY = (leftY + rightY) / 2
-    var centerZ = (leftZ + rightZ) / 2
-
-    var dimensionX = Math.abs(leftX - rightX);
-    var dimensionY = Math.abs(leftY - rightY);
-    var dimensionZ = Math.abs(leftZ - rightZ);
-
-    var playerEl = document.getElementById("player")
-    playerEl.setAttribute("position", `${centerX} ${centerY + 2} ${centerZ}`);
-    playerEl.setAttribute("rotation", "-90 0 0");
-  }
-
-  function rotatePlayer() {
-    var playerEl = document.getElementById("player")
-    playerEl.setAttribute("rotation", "-90 180 0");
-  }
 
   </script>
 
@@ -178,6 +182,13 @@
           </a-entity>
         </template>
 
+        <template id="projector-template">
+          <a-entity class="projector" projector="Optoma ML750ST">
+            <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
+            <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
+          </a-entity>
+        </template>
+
       <!-- /Templates -->
       </a-assets>
 
@@ -190,9 +201,9 @@
         </a-entity>
 
         <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+        <a-entity vive-controls="hand: right" spawn-projector="projectorTemplate:#projector-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="-126 -180 0">
-            <a-entity id="projector1" projector="Optoma ML750ST">
+            <a-entity id="projector-preview" projector="Optoma ML750ST">
               <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
               <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
             </a-entity>

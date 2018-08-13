@@ -72,21 +72,26 @@
 
   function copyProjectorPosition() {
 // for an object with class projector1 copy its (real world) position and rotation to camera
-    var projectorX = document.querySelector(".projector1").getAttribute("position").x
-    var projectorY = document.querySelector(".projector1").getAttribute("position").y
-    var projectorZ = document.querySelector(".projector1").getAttribute("position").z
-    var projectorRX = document.querySelector(".projector1").getAttribute("rotation").x
-    var projectorRY = document.querySelector(".projector1").getAttribute("rotation").y
-    var projectorRZ = document.querySelector(".projector1").getAttribute("rotation").z
+    var projectorX = document.querySelector(".projector").getAttribute("position").x
+    var projectorY = document.querySelector(".projector").getAttribute("position").y
+    var projectorZ = document.querySelector(".projector").getAttribute("position").z
+    var projectorRX = document.querySelector(".projector").getAttribute("rotation").x
+    var projectorRY = document.querySelector(".projector").getAttribute("rotation").y
+    var projectorRZ = document.querySelector(".projector").getAttribute("rotation").z
 
     var playerEl = document.getElementById("player")
     playerEl.setAttribute("position", `${projectorX} ${projectorY} ${projectorZ}`);
     playerEl.setAttribute("rotation", `${projectorRX} ${projectorRY} ${projectorRZ}`);
   }
 
+  function fixPOV() {
+    document.querySelector("[camera]").setAttribute("camera", "fov", 50);
+  }
+
   function rotatePlayer() {
+
     var playerEl = document.getElementById("player")
-    playerEl.setAttribute("rotation", "-90 180 0");
+    playerEl.setAttribute("rotation", "-90 90 0");
   }
 
   </script>
@@ -171,6 +176,12 @@
           </a-entity>
         </template>
 
+        <template id="projector-template">
+          <a-entity class="projector" projector="Optoma ML750ST">
+            <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
+            <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
+          </a-entity>
+        </template>
       <!-- /Templates -->
       </a-assets>
 
@@ -182,7 +193,7 @@
             ></a-sphere>
         </a-entity>
 
-        <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
+        <!-- <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
         <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="-126 -180 0">
             <a-entity id="projector1" projector="Optoma ML750ST">
@@ -190,7 +201,7 @@
               <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
             </a-entity>
           </a-entity>
-        </a-entity>
+        </a-entity> -->
       </a-entity>
 
       <a-entity position="0 0 0"
