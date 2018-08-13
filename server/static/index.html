@@ -1,317 +1,54 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>A-Frame Matta</title>
-    <meta name="description" content="A-Frame Matta">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-    <script src="/easyrtc/easyrtc.js"></script>
-    <!-- <script src="/build.js"></script> -->
-    <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
-
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
-    <!-- <script src="/js/spawn-in-circle.component.js"></script> -->
-
+    <title>Networked-Aframe Examples</title>
+    <meta name="description" content="Collection of examples for networked-aframe"></meta>
     <style>
-
-        /* .vivewand-ne {
-          z-index: 2;
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          display: block;
-          max-width:50vmin;
-          max-height:50vmin;
-          width: auto;
-          height: auto;
-        }
-
-        .vivewand-sw {
-          z-index: 2;
-          position: absolute;
-          bottom: 0px;
-          left: 0px;
-          display: block;
-          max-width:50vmin;
-          max-height:50vmin;
-          width: auto;
-          height: auto;
-        } */
-
-        .wizard {
-          z-index: 5;
-          border-radius: 10px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-          padding: 1.5em;
-          color: #FFF;
-          background: rgba(0, 0, 0, 0.75);
-          font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
-        }
-
-        </style>
-
-  </head>
-
-  <script>
-
-  // define a new component called "calibration-box"
-  AFRAME.registerComponent('calibration-box', {
-    init: function () {
-      console.log('Hello, World!');
-    },
-
-    // on each tick, get the position of the controllers
-    tick: function (time, timeDelta) {
-      // TODO: only run this code in "calibration mode"
-      // TODO: init these vars in init function, not on each tick
-      if (document.querySelectorAll(".left-controls").length > 0 && document.querySelectorAll(".right-controls").length > 0) {
-        var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
-        var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
-        var leftZ = document.querySelectorAll(".left-controls")[0].getAttribute("position").z
-        var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
-        var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
-        var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
-        var centerX = (leftX + rightX) / 2
-        var centerY = (leftY + rightY) / 2
-        var centerZ = (leftZ + rightZ) / 2
-        var dimensionX = Math.abs(leftX - rightX);
-        var dimensionY = Math.abs(leftY - rightY);
-        var dimensionZ = Math.abs(leftZ - rightZ);
-       // console.log(`centerX: ${centerX}; centerZ: ${centerZ}`);
-       // console.log(this.el.setAttribute("position","x", centerX));
-       // ratio of rectangle width and depth
-        this.el.setAttribute("position", `${centerX} ${centerY} ${centerZ}`);
-        this.el.setAttribute("geometry", "height", dimensionY);
-        this.el.setAttribute("geometry", "width", dimensionX);
-        this.el.setAttribute("geometry", "depth", dimensionZ);
+      html {
+        background: #33425B;
+        color: #FAFAFA;
+        font-family: monospace;
+        font-size: 20px;
+        padding: 10px 20px;
       }
-    }
-  });
-
-  function centerCamera() {
-    var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
-    var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
-    var leftZ = document.querySelectorAll(".left-controls")[0].getAttribute("position").z
-    var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
-    var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
-    var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
-
-    var centerX = (leftX + rightX) / 2
-    var centerY = (leftY + rightY) / 2
-    var centerZ = (leftZ + rightZ) / 2
-
-    var dimensionX = Math.abs(leftX - rightX);
-    var dimensionY = Math.abs(leftY - rightY);
-    var dimensionZ = Math.abs(leftZ - rightZ);
-
-    var playerEl = document.getElementById("player")
-    playerEl.setAttribute("position", `${centerX} ${centerY + 2} ${centerZ}`);
-    playerEl.setAttribute("rotation", "-90 0 0");
-  }
-
-  function rotatePlayer() {
-    var playerEl = document.getElementById("player")
-    playerEl.setAttribute("rotation", "-90 180 0");
-  }
-
-  // TODO: calculate rotation based off of aspect ratio of viewport
-  // Length of hypotenuse is distance between controllers
-  // a^2 + b^2 = c^2
-  // we know c (in VR meters)
-  // a = viewport width (in screen pixels)
-  // b = viewport height (in screen pixels)
-  // we know the aspect ratio of a:b, such as 16:9
-  // how to calculate a and b in VR meters?
-  // how to derive rotation of calibration box based on this?
-
-  </script>
-
+      h1 {
+        font-weight: 300;
+      }
+      a {
+        color: #FAFAFA;
+        /*display: block;*/
+        padding: 15px 0;
+      }
+      body > div {
+        margin: 20px 0;
+      }
+    </style>
+  </head>
   <body>
-
-    <a-scene networked-scene="
-      room: handcontrollers;
-      debug: true;
-    ">
-      <a-assets>
-
-        <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
-        <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
-
-
-        <!-- Templates -->
-
-        <!-- Player -->
-        <template id="player-template">
-          <a-entity></a-entity>
-        </template>
-
-        <!-- Head -->
-        <template id="head-template">
-          <a-entity class="avatar" scale="0.5 0.5 0.5">
-            <a-sphere class="head"
-              color="#ffffff"
-              scale="0.45 0.5 0.4"
-            ></a-sphere>
-            <a-entity class="face"
-              position="0 0.05 0"
-            >
-              <a-sphere class="eye"
-                color="#efefef"
-                position="0.16 0.1 -0.35"
-                scale="0.12 0.12 0.12"
-              >
-                <a-sphere class="pupil"
-                  color="#000"
-                  position="0 0 -1"
-                  scale="0.2 0.2 0.2"
-                ></a-sphere>
-              </a-sphere>
-              <a-sphere class="eye"
-                color="#efefef"
-                position="-0.16 0.1 -0.35"
-                scale="0.12 0.12 0.12"
-              >
-                <a-sphere class="pupil"
-                  color="#000"
-                  position="0 0 -1"
-                  scale="0.2 0.2 0.2"
-                ></a-sphere>
-              </a-sphere>
-            </a-entity>
-          </a-entity>
-        </template>
-
-        <!-- Hand -->
-        <template id="hand-template">
-          <a-entity>
-            <a-box scale="0.1 0.1 0.1"></a-box>
-          </a-entity>
-        </template>
-
-        <a-asset-item id="vive-controller-obj" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.obj"></a-asset-item>
-        <a-asset-item id="vive-controller-mtl" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.mtl"></a-asset-item>
-
-        <template id="avatar-template">
-          <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
-        </template>
-
-        <template id="right-controls-template">
-          <a-entity class="right-controls">
-            <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
-          </a-entity>
-        </template>
-
-        <template id="left-controls-template">
-          <a-entity class="left-controls">
-            <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
-          </a-entity>
-        </template>
-
-      <!-- /Templates -->
-      </a-assets>
-
-      <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" wasd-controls>
-        <a-entity camera look-controls networked="template:#head-template;attachTemplateToLocal:false;">
-            <a-sphere class="head"
-              random-color
-              visible="false"
-            ></a-sphere>
-        </a-entity>
-
-        <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" networked="template:#right-controls-template;attachTemplateToLocal:false;">
-          <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="-126 -180 0">
-            <a-entity id="projector1" projector="Optoma ML750ST">
-              <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
-              <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
-            </a-entity>
-          </a-entity>
-        </a-entity>
-      </a-entity>
-
-      <!-- <a-entity id="calibration-box" position="0 0 0" geometry="primitive: box; width: 1; height: 1; depth: 1" color="red" calibration-box></a-entity> -->
-
-      <a-entity position="0 0 0"
-        geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
-        material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
-﻿﻿﻿﻿
-      <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
-      <a-entity light="color: #ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
-
-      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
-      <a-entity id="particles" particle-system="preset: snow"></a-entity>
-    </a-scene>
-
-    <!-- <div class="vivewand-ne">
-      <img src="./img/vive-topdown-NE2.png">
-    </div> -->
-
-    <div class="wizard content">
-      <h1 class="title has-text-white">Locate Your Projector</h1>
-      <p><a class="has-text-primary" href="">Follow setup instructions to get projector and HTC Vive server running.</a></p>
-        <p>Place the right HTC Vive controller against the projector pointing down and press the trigger button. Use the VR headset to align the virtual projector to match the real life projector.</p>
-        <p><a href="#" class="button is-primary">This button doesn't do anything yet.</a></p>
+    <h1>A-Frame Matta (Magic Carpet)</h1>
+    <div>
+      <a href="calibrationbox-serverclient.html">Old Calibration Method - Diagonal Controllers</a>
+      <span>Server and client run same page, calibrate projector screen by placing controllers on either end of the projected screen corners. Unfinished.</span>
+    </div>
+    <div>
+      <a href="server.html">Server</a>
+      <span>Run this on machine with HTC Vive (or maybe Oculus, untested)</span>
+    </div>
+    <div>
+      <a href="client.html">Client</a>
+      <span>Display this on a screen connected to the projector.</span>
     </div>
 
-    <!-- <div class="vivewand-sw">
-      <img src="./img/vive-topdown-SW2.png"/>
-    </div> -->
+    <br>
 
+    <p>Networked A-Frame by <a href="https://twitter.com/haydenlee37" target="_blank">Hayden on twitter</a>.</p>
 
-
-    <script>
-      // On mobile remove elements that are resource heavy
-      var isMobile = AFRAME.utils.device.isMobile();
-
-      if (isMobile) {
-        var particles = document.getElementById('particles');
-        particles.parentNode.removeChild(particles);
-      }
-    </script>
-
-    <script>
-      // Define custom schema for syncing avatar color, set by random-color
-      NAF.schemas.add({
-        template: '#head-template',
-        components: [
-          'position',
-          'rotation',
-          {
-            selector: '.head',
-            component: 'material'
-          }
-        ]
-      });
-
-      NAF.schemas.add({
-        template: '#player-template',
-        components: [
-          'position',
-          'rotation'
-        ]
-      });
-
-      NAF.schemas.add({
-        template: '#hand-template',
-        components: [
-          'position',
-          'rotation'
-        ]
-      });
-
-      // Called by Networked-Aframe when connected to server
-      function onConnect () {
-        console.log("onConnect");
-      }
-    </script>
+    <!-- GitHub Corner. -->
+    <a href="https://github.com/haydenjameslee/networked-aframe" class="github-corner">
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </a>
+    <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+    </style>
   </body>
 </html>
