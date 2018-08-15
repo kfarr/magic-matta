@@ -8,12 +8,15 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
     <!-- <script src="/build.js"></script> -->
     <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
 
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
     <!-- <script src="/js/spawn-in-circle.component.js"></script> -->
@@ -84,24 +87,23 @@
     playerEl.setAttribute("rotation", `${projectorRX} ${projectorRY} ${projectorRZ}`);
   }
 
-  function fixPOV() {
-    document.querySelector("[camera]").setAttribute("camera", "fov", 50);
+  function fixPOV(pov = 30) {
+    document.querySelector("[camera]").setAttribute("camera", "fov", pov);
   }
 
   function rotatePlayer() {
-
     var playerEl = document.getElementById("player")
     playerEl.setAttribute("rotation", "-90 90 0");
+    document.querySelector(".projector").setAttribute("visible", false);
   }
 
   </script>
 
   <body>
 
-    <a-scene networked-scene="
+    <a-scene gridhelper="size: 5; divisions: 50; colorGrid: fuchsia" networked-scene="
       room: handcontrollers;
       debug: true;
-      ﻿﻿﻿adapter: EasyRTC;﻿﻿﻿
     ">
       <a-assets>
 
