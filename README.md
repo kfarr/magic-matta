@@ -32,7 +32,8 @@ Experiments to create a "magic carpet" type of experience in WebXR using A-Frame
 * Change view of projector screen output to match actual location.
 
 ## Future ideas
-* setup UI improvement: red dot in corner, instruction to put controller on back with visual and arrow pointing to dot. Photo: https://static2.nordic.pictures/15454055-thickbox_default/htc-vive-controller.jpg
+* orthogonal camera instead of perspective, see notes in codebase
+* more instructions for calibration
 * next button freeze rectangle, then adjust camera position
 * feature multiple minigames, switch by shaking controller
 * drawing feature (like babypi), start drawing when controller is pointed up like a pen (small end down)
