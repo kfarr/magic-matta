@@ -24,12 +24,12 @@ Experiments to create a "magic carpet" type of experience in WebXR using A-Frame
 * For recommendations on projector and mounting equipment, <a href="https://github.com/chaimgingold/Tabla/#recommended-camera-and-projector">see instructions from La Tabla, another cool projector based XR project</a>
 
 ## Software setup instructions
-* clone repo, npm install, npm start
-* On a PC with HTC Vive, use your favorite webvr enabled browser like Firefox or Supermedium to navigate to localhost:8080/index.html (This uses local webrtc node.js server to send controller and headset position)
-* On a computer hooked up to the projector, use any browser (webvr support not required) to open [SERVER IP]:8080/client.html
-* Use the 2 controllers to specify 2 opposite corners of your the projected screen area from the projector pointing down at the floor.
-* The bounds of this client projector are now defined. (What's next?)
-* Change view of projector screen output to match actual location.
+* On a PC with HTC Vive, clone the repo, npm install, npm start
+* Use your favorite webvr enabled browser like Firefox or Supermedium to navigate to localhost:8080/server.html
+* Use the right Vive controller to position the virtual projector to match the real-life position and press the trigger. 
+* On the same or another computer hooked up to the projector, use any browser (webvr support not required) to open [SERVER IP]:8080/client.html
+* Press the "init" button and use the on-screen adjustment buttons to tweak the alignment of the projector and the actual controller positions. 
+* The bounds of this client projector are now defined.
 
 ## Future ideas
 * orthogonal camera instead of perspective, see notes in codebase
