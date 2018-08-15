@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
     <!-- <script src="/build.js"></script> -->
@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
     <!-- <script src="/js/spawn-in-circle.component.js"></script> -->
 
-    <script  src="https://rawgit.com/fernandojsg/aframe-input-mapping-component/master/dist/aframe-input-mapping-component.min.js"></script>
+    <!-- <script  src="https://rawgit.com/fernandojsg/aframe-input-mapping-component/master/dist/aframe-input-mapping-component.min.js"></script> -->
 
 
     <style>
@@ -44,35 +44,23 @@
   //   triggerdown: 'placeObject'
   // },
 
-  var mappings = {
-    default: {
-      'vive-controls': {
-        triggerdown: 'placeObject'
-      },
-    }
-  };
-
-  AFRAME.registerInputMappings(mappings);
+  // var mappings = {
+  //   default: {
+  //     'vive-controls': {
+  //       triggerdown: 'placeObject'
+  //     },
+  //   }
+  // };
+  //
+  // AFRAME.registerInputMappings(mappings);
   AFRAME.registerComponent('spawn-projector', {
     schema: {
       projectorTemplate: {default: '#projector-template'},
       projectorClass: {default: '#projector1'},
-      triggerKeyCode: {default: 32} // spacebar
     },
 
     init: function() {
-      // var that = this;
-      // document.body.onkeyup = function(e){
-      //   if(e.keyCode == that.data.triggerKeyCode){
-      //     that.shoot();
-      //   }
-      // }
-
     },
-
-    // shoot: function() {
-    //   this.createBullet();
-    // },
 
     play: function () {
       this.el.addEventListener('triggerdown', this.placeObject.bind(this));
@@ -99,11 +87,14 @@
 
       var worldQuaternion = new THREE.Quaternion();
       thisEl.object3D.getWorldQuaternion(worldQuaternion);
+      console.log(worldQuaternion);
 
       el.object3D.applyQuaternion(worldQuaternion);
-
       var scene = document.querySelector('a-scene');
       scene.appendChild(el);
+
+
+
     },
 
     getInitialPosition: function(spawnerEl) {
@@ -123,6 +114,7 @@
     <a-scene networked-scene="
       room: handcontrollers;
       debug: true;
+      adapter: EasyRTC;
     ">
       <a-assets>
 
@@ -200,7 +192,7 @@
 
         <template id="projector-template">
           <a-entity class="projector" projector="Optoma ML750ST">
-            <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
+            <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
             <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
           </a-entity>
         </template>
@@ -218,9 +210,9 @@
 
         <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
         <a-entity vive-controls="hand: right" spawn-projector="projectorTemplate:#projector-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
-          <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="-126 -180 0">
+          <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="123 0 0">
             <a-entity id="projector-preview" projector="Optoma ML750ST">
-              <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
+              <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
               <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
             </a-entity>
           </a-entity>

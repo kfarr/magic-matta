@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
     <!-- <script src="/build.js"></script> -->
@@ -101,6 +101,7 @@
     <a-scene networked-scene="
       room: handcontrollers;
       debug: true;
+      ﻿﻿﻿adapter: EasyRTC;﻿﻿﻿
     ">
       <a-assets>
 
@@ -178,7 +179,7 @@
 
         <template id="projector-template">
           <a-entity class="projector" projector="Optoma ML750ST">
-            <a-box position="0.02 0 0.06" scale="0.11 0.04 0.11" color="white"></a-box>
+            <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
             <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
           </a-entity>
         </template>
