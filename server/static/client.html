@@ -122,19 +122,48 @@
     var playerEl = document.getElementById("player")
     playerEl.setAttribute("rotation", "-90 90 0");
   }
-
+  function setPlayerHeight(height = 1.5) {
+    var playerEl = document.getElementById("player");
+    var newPosition = playerEl.getAttribute("position");
+    newPosition.y = height;
+    playerEl.setAttribute("position", newPosition);
+  }
   function initProjector() {
     copyProjectorPosition();
-    fixFOV(42);
+//    fixFOV(42);
     rotatePlayer();
     document.querySelector(".projector").setAttribute("visible", false);
+//    orthoCamera();
+    setPlayerHeight();
   }
 
+  AFRAME.registerComponent('ortho', {
+    init: function () {
+      var sceneEl = this.el.sceneEl;
+      sceneEl.addEventListener('loaded', () => {
+        this.originalCamera = sceneEl.camera;
+        this.cameraParent = sceneEl.camera.parent;
+        this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.5,1.5);
+        // var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, near, far );
+        // 103 cm projector mount height (let's say 1m)
+        // 124 cm screen width x 76.5 cm screen height = 1.24 x 0.765
+        // (-0.62,0.62,0.3825,-0.3825,0.5,1.5)
+        // near 0.5, far 1.5, height of camera should be 1.5 y
+        // https://stackoverflow.com/questions/17558085/three-js-orthographic-camera/17567292#17567292
+        this.cameraParent.add(this.orthoCamera);
+        sceneEl.camera = this.orthoCamera;
+      });
+    },
+    remove: function () {
+      this.cameraParent.remove(this.orthoCamera);
+      sceneEl.camera = this.originalCamera;
+    }
+  });
   </script>
 
   <body>
 
-    <a-scene gridhelper="size: 5; divisions: 50; colorGrid: fuchsia" networked-scene="
+    <a-scene ortho gridhelper="size: 5; divisions: 50; colorGrid: fuchsia" networked-scene="
       room: handcontrollers;
       debug: true;
     ">
@@ -222,7 +251,7 @@
       </a-assets>
 
       <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" wasd-controls>
-        <a-entity camera look-controls networked="template:#head-template;attachTemplateToLocal:false;">
+        <a-entity camera ortho networked="template:#head-template;attachTemplateToLocal:false;">
             <a-sphere class="head"
               random-color
               visible="false"
@@ -243,7 +272,7 @@
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
         material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
-﻿﻿﻿﻿
+
       <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
       <a-entity light="color: #ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
 
