@@ -118,9 +118,15 @@
     fov += delta;
     cameraEl.setAttribute("camera", "fov", fov);
   }
-  function rotatePlayer() {
+  function resetRotation() {
     var playerEl = document.getElementById("player")
     playerEl.setAttribute("rotation", "-90 90 0");
+  }
+  function rotatePlayerZ(delta = 1) {
+    var playerEl = document.getElementById("player")
+    var newRotation = playerEl.getAttribute("rotation");
+    newRotation.z += delta;
+    playerEl.setAttribute("rotation", newRotation);
   }
   function setPlayerHeight(height = 1.5) {
     var playerEl = document.getElementById("player");
@@ -131,7 +137,7 @@
   function initProjector() {
     copyProjectorPosition();
 //    fixFOV(42);
-    rotatePlayer();
+    resetRotation();
     document.querySelector(".projector").setAttribute("visible", false);
 //    orthoCamera();
     setPlayerHeight();
@@ -143,7 +149,7 @@
       sceneEl.addEventListener('loaded', () => {
         this.originalCamera = sceneEl.camera;
         this.cameraParent = sceneEl.camera.parent;
-        this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.5,1.5);
+        this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.5,1.6);
         // var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, near, far );
         // 103 cm projector mount height (let's say 1m)
         // 124 cm screen width x 76.5 cm screen height = 1.24 x 0.765
@@ -272,7 +278,10 @@
       <a-entity position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
         material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4; sphericalEnvMap: #sky;"></a-entity>
-
+      <a-entity position="0 -0.0001 0"
+              geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
+              material="color: black;"></a-entity>
+      ﻿﻿﻿﻿
       <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
       <a-entity light="color: #ffaaff; intensity: 1.5" position="5 5 5"></a-entity>
 
@@ -287,7 +296,7 @@
           <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
           <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>
           <a onclick="movePlayerZ()" class="button">z+</a><a onclick="movePlayerZ(-0.01)" class="button">z-</a>
-          <a onclick="changeFOV()" class="button">fov+</a><a onclick="changeFOV(-1)" class="button">fov-</a>
+          <a onclick="rotatePlayerZ()" class="button">rotateZ+</a><a onclick="rotatePlayerZ(-1)" class="button">rotateZ-</a>
           </p>
     </div>
 
