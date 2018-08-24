@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
     <!-- <script src="/build.js"></script> -->
-    <script>window.NAF || document.write('<script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js">\x3C/script>')</script>
+    <script src="https://unpkg.com/networked-aframe/dist/networked-aframe.min.js"></script>
 
     <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
@@ -26,9 +26,10 @@
           z-index: 5;
           border-radius: 10px;
           position: absolute;
-          top: 50%;
+          top: 10%;
           left: 50%;
-          transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-10%);
+          /* transform: translateX(-50%) translateY(-10%) rotate(180deg); */
           padding: 1.5em;
           color: #FFF;
           background: rgba(0, 0, 0, 0.75);
@@ -73,14 +74,14 @@
     }
   });
 
-  function copyProjectorPosition() {
+  function copyProjectorPosition(selector=".projector") {
 // for an object with class projector1 copy its (real world) position and rotation to camera
-    var projectorX = document.querySelector(".projector").getAttribute("position").x
-    var projectorY = document.querySelector(".projector").getAttribute("position").y
-    var projectorZ = document.querySelector(".projector").getAttribute("position").z
-    var projectorRX = document.querySelector(".projector").getAttribute("rotation").x
-    var projectorRY = document.querySelector(".projector").getAttribute("rotation").y
-    var projectorRZ = document.querySelector(".projector").getAttribute("rotation").z
+    var projectorX = document.querySelector(selector).getAttribute("position").x
+    var projectorY = document.querySelector(selector).getAttribute("position").y
+    var projectorZ = document.querySelector(selector).getAttribute("position").z
+    var projectorRX = document.querySelector(selector).getAttribute("rotation").x
+    var projectorRY = document.querySelector(selector).getAttribute("rotation").y
+    var projectorRZ = document.querySelector(selector).getAttribute("rotation").z
 
     var playerEl = document.getElementById("player")
     playerEl.setAttribute("position", `${projectorX} ${projectorY} ${projectorZ}`);
@@ -135,10 +136,11 @@
     playerEl.setAttribute("position", newPosition);
   }
   function initProjector() {
-    copyProjectorPosition();
+    // copyProjectorPosition();
+    copyProjectorPosition(".marker");
 //    fixFOV(42);
     resetRotation();
-    document.querySelector(".projector").setAttribute("visible", false);
+    // document.querySelector(".projector").setAttribute("visible", false);
 //    orthoCamera();
     setPlayerHeight();
   }
@@ -149,7 +151,7 @@
       sceneEl.addEventListener('loaded', () => {
         this.originalCamera = sceneEl.camera;
         this.cameraParent = sceneEl.camera.parent;
-        this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.5,1.6);
+        this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.25,1.6);
         // var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, near, far );
         // 103 cm projector mount height (let's say 1m)
         // 124 cm screen width x 76.5 cm screen height = 1.24 x 0.765
@@ -253,6 +255,25 @@
             <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
           </a-entity>
         </template>
+
+        <template id="crosshairs-template">
+          <a-entity class="marker">
+            <a-entity
+             position="0 0 0"
+             geometry="primitive: ring; radiusInner: 0.0000001; radiusOuter: 0.04"
+             material="color: red; shader: flat"></a-entity>
+            <a-entity
+             geometry="primitive: box; width: 0.005; height: 0.08; depth: 0.001"
+             position="0 0 0.001"
+             material="color: white; shader: flat"></a-entity>
+            <a-entity
+              geometry="primitive: box; width: 0.08; height: 0.005; depth: 0.001"
+              position="0 0 0.001"
+              material="color: white; shader: flat"></a-entity>
+            <a-triangle material="color: white; shader: flat" position="0 0.015 0.001" rotation="0 0 0" vertex-a="0 0.0075 0" vertex-b="-0.0075 -0.0075 0" vertex-c="0.0075 -0.0075 0"></a-triangle>
+         </a-entity>
+        </template>
+
       <!-- /Templates -->
       </a-assets>
 
@@ -262,6 +283,19 @@
               random-color
               visible="false"
             ></a-sphere>
+            <a-entity
+               position="0 0 -0.5"
+               geometry="primitive: ring; radiusInner: 0.0000001; radiusOuter: 0.04"
+               material="color: red; shader: flat"></a-entity>
+            <a-entity
+               geometry="primitive: box; width: 0.005; height: 0.08; depth: 0.001"
+               position="0 0 -0.499"
+               material="color: white; shader: flat"></a-entity>
+             <a-entity
+                geometry="primitive: box; width: 0.08; height: 0.005; depth: 0.001"
+                position="0 0 -0.499"
+                material="color: white; shader: flat"></a-entity>
+             <a-triangle material="color: white; shader: flat" position="0 0.015 -0.499" rotation="0 0 0" vertex-a="0 0.0075 0" vertex-b="-0.0075 -0.0075 0" vertex-c="0.0075 -0.0075 0"></a-triangle>
         </a-entity>
 
         <!-- <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
@@ -290,8 +324,9 @@
     </a-scene>
 
     <div class="wizard content">
+      <h4 class="title has-text-white">CLIENT</h4>
       <h1 class="title has-text-white">Show This Tab on Your Projector</h1>
-      <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">After you've setup the server</a>, project this page on the floor or surface. Click `init` once server has placed projector, then use controls to calibrate.</p>
+      <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">After you've setup the `server`</a>, project this `client` page down on the floor or surface. Click `init` once `server` has matched the red target, then use controls below to calibrate.</p>
         <p><a onclick="initProjector()" class="button is-primary">init</a>
           <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
           <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>

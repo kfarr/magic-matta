@@ -58,8 +58,7 @@
   // AFRAME.registerInputMappings(mappings);
   AFRAME.registerComponent('spawn-projector', {
     schema: {
-      projectorTemplate: {default: '#projector-template'},
-      projectorClass: {default: '#projector1'},
+      spawnTemplate: {default: '#projector-template'},
     },
 
     init: function() {
@@ -81,11 +80,11 @@
     placeObject: function() {
       console.log("create");
       var el = document.createElement('a-entity');
-      el.setAttribute('networked', 'template:' + this.data.projectorTemplate);
+      el.setAttribute('networked', 'template:' + this.data.spawnTemplate);
       // el.setAttribute('remove-in-seconds', 3);
       // el.setAttribute('forward', 'speed:0.3');
 
-      var thisEl = document.getElementById("projector-preview");
+      var thisEl = document.getElementById("crosshairs-preview");
       el.setAttribute('position', this.getInitialPosition(thisEl));
 
       var worldQuaternion = new THREE.Quaternion();
@@ -191,6 +190,24 @@
           </a-entity>
         </template>
 
+        <template id="crosshairs-template">
+          <a-entity class="marker">
+            <a-entity
+             position="0 0 0"
+             geometry="primitive: ring; radiusInner: 0.0000001; radiusOuter: 0.04"
+             material="color: red; shader: flat"></a-entity>
+            <a-entity
+             geometry="primitive: box; width: 0.005; height: 0.08; depth: 0.001"
+             position="0 0 0.001"
+             material="color: white; shader: flat"></a-entity>
+            <a-entity
+              geometry="primitive: box; width: 0.08; height: 0.005; depth: 0.001"
+              position="0 0 0.001"
+              material="color: white; shader: flat"></a-entity>
+            <a-triangle material="color: white; shader: flat" position="0 0.015 0.001" rotation="0 0 0" vertex-a="0 0.0075 0" vertex-b="-0.0075 -0.0075 0" vertex-c="0.0075 -0.0075 0"></a-triangle>
+         </a-entity>
+        </template>
+
       <!-- /Templates -->
       </a-assets>
 
@@ -203,12 +220,29 @@
         </a-entity>
 
         <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" spawn-projector="projectorTemplate:#projector-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+        <a-entity vive-controls="hand: right" spawn-projector="spawnTemplate:#crosshairs-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="123 0 0">
-            <a-entity id="projector-preview" projector="Optoma ML750ST">
+            <!-- <a-entity id="projector-preview" projector="Optoma ML750ST">
               <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
               <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
-            </a-entity>
+            </a-entity> -->
+          </a-entity>
+          <a-entity id="controller-adjustment" position="0 -0.03 -0.03" rotation="33 0 0">
+            <a-entity id="crosshairs-preview" position="0 0.005 0" rotation="0 0 0">
+              <a-entity
+                 position="0 0 -0.001"
+                 geometry="primitive: ring; radiusInner: 0.0000001; radiusOuter: 0.04"
+                 material="color: red; shader: flat"></a-entity>
+              <a-entity
+                 geometry="primitive: box; width: 0.005; height: 0.08; depth: 0.001"
+                 position="0 0 0"
+                 material="color: white; shader: flat"></a-entity>
+               <a-entity
+                  geometry="primitive: box; width: 0.08; height: 0.005; depth: 0.001"
+                  position="0 0 0"
+                  material="color: white; shader: flat"></a-entity>
+                <a-triangle material="color: white; shader: flat" position="0 0.015 0" rotation="0 0 0" vertex-a="0 0.0075 0" vertex-b="-0.0075 -0.0075 0" vertex-c="0.0075 -0.0075 0"></a-triangle>
+           </a-entity>
           </a-entity>
         </a-entity>
       </a-entity>
@@ -225,9 +259,14 @@
     </a-scene>
 
     <div class="wizard content">
-      <h1 class="title has-text-white">Use Vive Wand to Locate Projector</h1>
-      <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">Follow setup instructions to get a projector mounted, run this page on the HTC Vive making this the "server".</a></p>
-        <p>Place the right HTC Vive controller against the projector pointing down and press the trigger button. Use the VR headset to align the virtual projector to match the real life projector.</p>
+
+      <h4 class="title has-text-white">SERVER</h4>
+      <h1 class="title has-text-white">Use This Tab in a WebVR Browser</h1>
+        <p>First, setup your hardware by <a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">following these instructions to get a projector mounted</a>.</p>
+        <p>Then run this `server` page using a WebVR Browser such as <a href="supermedium.com">supermedium</a> with a connected HTC Vive and controllers. Make sure to enter VR mode once this page loads to access the headset and controller positions.</a></p>
+        <p>Load the <a href="/client.html">`client`</a> page and display it on your projector in full screen, including hiding the toolbar.</p>
+        <p>Use the right HTC Vive controller to locate the red target shown in your projector. Align the controller target to match and press the `trigger` button.</p>
+        <p>Then, on the `client` follow the setup instructions on the screen and click the green `init` button.</p>
         <p><a href="#" class="button is-primary">This button doesn't do anything yet.</a></p>
     </div>
 
@@ -241,6 +280,7 @@
     </script>
 
     <script>
+
       // Define custom schema for syncing avatar color, set by random-color
       NAF.schemas.add({
         template: '#head-template',
