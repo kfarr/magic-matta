@@ -1,5 +1,5 @@
 # aframe-matta 🏳️‍🌈
-Experiments to create a "magic carpet" type of experience in WebXR using A-Frame and HTC Vive. ("matta" is swedish for carpet or rug)
+Experiments to create a "magic carpet" type of experience in WebXR using A-Frame and HTC Vive. ("matta" is swedish for carpet or rug) This is a work in progress and does not work easily without significant manual configuration.
 
 ## Why?
 * XR experience that kids can see without needing headset
@@ -7,6 +7,11 @@ Experiments to create a "magic carpet" type of experience in WebXR using A-Frame
 * Try to have "multimodal" experience (allow simultaneous headset and projector use with synced scene)
 * Try to create a fun toy that can also teach things
 * HTC Vive instead of computer vision for higher accuracy and lower latency, easier for development to ignore CV complexities
+
+## Work in Progress Examples*
+<img height="40%" width="40%" src="./docs/bus-experiment-Dr8BgjVUcAED1vt.jpg" /> <img height="40%" width="40%" src="./docs/lego-street-DcTPKh0VAAIXgmg.jpg" />
+
+*Parts of these examples come from https://github.com/kfarr/aframe-bus and https://github.com/kfarr/streetmix3d. Requires manual configuration.
 
 ## What you need
 * A PC with HTC Vive
