@@ -1,5 +1,5 @@
-# aframe-matta 🏳️‍🌈
-Experiments to create a "magic carpet" type of experience in WebXR using A-Frame and HTC Vive. ("matta" is swedish for carpet or rug) This is a work in progress and does not work easily without significant manual configuration.
+# magic-matta 🏳️‍🌈
+Experiments to create a "magic carpet" type of experience in WebXR using A-Frame, HTC Vive and a projector. ("matta" is swedish for carpet or rug) This is a work in progress and does not work easily without significant manual configuration.
 
 ## Why?
 * XR experience that kids can see without needing headset
