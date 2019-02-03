@@ -13,23 +13,25 @@ Experiments to create a "magic carpet" type of experience in WebXR using A-Frame
 
 *Parts of these examples come from https://github.com/kfarr/aframe-bus and https://github.com/kfarr/streetmix3d. Requires manual configuration.
 
-## What you need
-* A PC with HTC Vive
-* A projector mounted about 1.5 meters off the ground pointing downward at the floor
-* Optional - a separate computer to feed the projector (or can use same Vive PC for this)
-* Optional - a white carpet square of the same or slightly larger dimensions than the projector's throw dimensions at mounting height
+# Project Setup Instructions
 
-## Hardware setup instructions
+## Equipment Needed
+* A PC with HTC Vive calibrated with room space
+* A projector mounted about 1.5 meters off the ground pointing downward at the floor. Measure the total size of the projected screen size in meters.
+* Optional - A reflective bright "screen" on the floor that matches the projected screen size. You can use a white carpet patch or white butcher (large format) paper. You can find carpet "remnants" that work well for this at local carpet stores for as low as $10.
+* Optional - A separate computer to feed the projector or you can use the same Vive PC for this.
+
+## Hardware Setup
 * First choose an area within the HTC Vive lighthouse tracker boundaries for the projector:
-<img src="./docs/projector-placement-topdown.png" /> Top-down view: red represents the area of the projected screen. Screen can be anywhere within the lighthouse tracker bounds. It can be any dimensions (portrait or landscape aspect ratio) but make sure it is at a right angle to the lighthouse tracker bounds.
-
+<img src="./docs/projector-placement-topdown.png" /><br />
+Top-down view: red represents the area of the projected screen. Screen can be anywhere within the lighthouse tracker bounds. It can be any dimensions (portrait or landscape aspect ratio) but make sure it is at a right angle to the lighthouse tracker bounds.
 * Mount the projector approx 1.5m off the floor facing down. Most projectors include a 1/4" tripod mount thread (female), you can get clamps with a 1/4" thread (male) to easily mount a mini projector on a table, attach to shelves, etc.
-<img src="./docs/projector-placement-side.jpg" /> Side view: suggested mounting heigh of 1.5m, depends on your projector's optics and desired screen size.
-
+<img src="./docs/projector-placement-side.jpg" /><br />
+Side view: suggested mounting heigh of 1.5m, depends on your projector's optics and desired screen size.
 * For recommendations on projector and mounting equipment, <a href="https://github.com/chaimgingold/Tabla/#recommended-camera-and-projector">see instructions from La Tabla, another cool projector based XR project</a>
 
-## Software setup instructions
-* On a PC with HTC Vive, clone the repo, npm install, npm start
+## Software Setup
+* On a PC with HTC Vive, clone the repo, `npm install`, `npm start`
 * Use your favorite webvr enabled browser like Firefox or Supermedium to navigate to localhost:8080/server.html
 * Use the right Vive controller to position the virtual projector to match the real-life position and press the trigger. 
 * On the same or another computer hooked up to the projector, use any browser (webvr support not required) to open [SERVER IP]:8080/client.html
