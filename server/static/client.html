@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>A-Frame Matta</title>
+    <title>Magic Matta - Client Projector</title>
     <meta name="description" content="A-Frame Matta">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,6 +34,28 @@
           color: #FFF;
           background: rgba(0, 0, 0, 0.75);
           font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+
+
+        @keyframes spinner {
+          to {transform: rotate(360deg);}
+        }
+
+        .spinner:before {
+          content: '';
+          box-sizing: border-box;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 20px;
+          height: 20px;
+          margin-top: -10px;
+          margin-left: -10px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          border-top-color: #FFFF33;
+          border-bottom-color: #FFFF33;
+          animation: spinner .8s ease infinite;
         }
     </style>
 
@@ -187,6 +209,10 @@
           <a-entity></a-entity>
         </template>
 
+        <template id="client-player-template">
+          <a-entity class="client-player"></a-entity>
+        </template>
+
         <!-- Head -->
         <template id="head-template">
           <a-entity class="avatar" scale="0.25 0.25 0.25">
@@ -277,7 +303,7 @@
       <!-- /Templates -->
       </a-assets>
 
-      <a-entity id="player" networked="template:#player-template;attachTemplateToLocal:false;" wasd-controls>
+      <a-entity id="player" networked="template:#client-player-template;attachTemplateToLocal:false;" wasd-controls>
         <a-entity camera ortho networked="template:#head-template;attachTemplateToLocal:false;">
             <a-sphere class="head"
               random-color
@@ -324,15 +350,22 @@
     </a-scene>
 
     <div class="wizard content">
-      <h4 class="title has-text-white">CLIENT</h4>
-      <h1 class="title has-text-white">Show This Tab on Your Projector</h1>
+      <h1 class="title has-text-white">Client Projector</h1>
+      <h4 class="title has-text-white">Open This Page and Show on Projector</h4>
+      <p><span id="has-connected" class="spinner" style="position: relative;">❌</span> #1 Setup project following <a class="has-text-primary" href="https://github.com/kfarr/magic-matta/blob/master/README.md#equipment-needed">these instructions</a>. Make sure node server is running on the Server.</p>
+      <p><span id="has-right" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if right hand control is visible on network.)</p>
+      <p><span id="has-fullscreen">❌</span> #4 Show this "Client Projector" page in full screen but NOT in a WebVR browser. Make sure no toolbar, bookmark or other browser bars are visible. </p>
+<!-- <input type="button" value="click to go fullscreen" onclick="requestFullScreen()"> -->
+      <p><span id="has-projector">❌</span> #5 Use the right HTC Vive controller to locate the red target shown in your projector. Align the controller target to match and press the `trigger` button.</p>
+      <p><span id="align-projector">❌</span> #6 Press the "Init" button below.</p>
+
       <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">After you've setup the `server`</a>, project this `client` page down on the floor or surface. Click `init` once `server` has matched the red target, then use controls below to calibrate.</p>
-        <p><a onclick="initProjector()" class="button is-primary">init</a>
-          <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
-          <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>
-          <a onclick="movePlayerZ()" class="button">z+</a><a onclick="movePlayerZ(-0.01)" class="button">z-</a>
-          <a onclick="rotatePlayerZ()" class="button">rotateZ+</a><a onclick="rotatePlayerZ(-1)" class="button">rotateZ-</a>
-          </p>
+      <p><a onclick="initProjector()" class="button is-primary">Init</a>
+        <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
+        <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>
+        <a onclick="movePlayerZ()" class="button">z+</a><a onclick="movePlayerZ(-0.01)" class="button">z-</a>
+        <a onclick="rotatePlayerZ()" class="button">rotateZ+</a><a onclick="rotatePlayerZ(-1)" class="button">rotateZ-</a>
+      </p>
     </div>
 
     <script>
@@ -342,6 +375,43 @@
         var particles = document.getElementById('particles');
         particles.parentNode.removeChild(particles);
       }
+
+      var rightControlClientInterval = setInterval(function(){
+        if(document.querySelectorAll(".right-controls").length > 0) {
+          document.querySelector("#has-right").textContent = "✅";
+          document.querySelector("#has-right").classList.remove("spinner");
+          clearInterval(rightControlClientInterval);
+        }
+      },2000);
+
+      // on window resize, check full screen
+      var checkFullScreen = function(){
+        if((window.fullScreen) ||
+           (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+           document.querySelector("#has-fullscreen").textContent = "✅";
+        } else {
+           document.querySelector("#has-fullscreen").textContent = "❌";
+        }
+      }
+      window.addEventListener('resize', checkFullScreen, true);
+
+      function requestFullScreen() {
+        var el = document.body;
+        // Supports most browsers and their versions.
+        var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen
+        || el.mozRequestFullScreen || el.msRequestFullScreen;
+        if (requestMethod) {
+          // Native full screen.
+          requestMethod.call(el);
+        } else if (typeof window.ActiveXObject !== "undefined") {
+          // Older IE.
+          var wscript = new ActiveXObject("WScript.Shell");
+          if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+          }
+        }
+      }
+
     </script>
 
     <script>
@@ -376,7 +446,9 @@
 
       // Called by Networked-Aframe when connected to server
       function onConnect () {
-        console.log("onConnect");
+        console.log("Network A-Frame Fires 'onConnect'");
+        document.querySelector("#has-connected").textContent = "✅";
+        document.querySelector("#has-connected").classList.remove("spinner");
       }
     </script>
   </body>
