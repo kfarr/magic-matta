@@ -167,13 +167,50 @@
     setPlayerHeight();
   }
 
+  function makeOrthoCoordinates(screenWidth = 1.24, screenHeight = 0.765, near = 0.25, far = 1.6) {
+    // for defaults, output should be (-0.62,0.62,0.3825,-0.3825,0.25,1.6)
+    // for given projector screen width and height and the mount height of the lens of the projector, generate an orthographic camera to match in threejs
+
+    // var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, near, far );
+    // 103 cm projector mount height (let's say 1m)
+    // 124 cm screen width x 76.5 cm screen height = 1.24 x 0.765
+    // (-0.62,0.62,0.3825,-0.3825,0.5,1.5)
+    // near 0.5, far 1.5, height of camera should be 1.5 y
+    // https://stackoverflow.com/questions/17558085/three-js-orthographic-camera/17567292#17567292
+    return [screenWidth/-2, screenWidth/2, screenHeight/2, screenHeight/-2, near, far];
+  }
+
+  // update ortho coordinates
+  function updateOrthoCoordinates(coordinatesAsArray) {
+    // get the threejs camera object representing ortho camera
+    var camera = document.querySelector("[camera]").getObject3D('camera');
+    // set each value for the 6 properties:
+    // OrthographicCamera( left : Number, right : Number, top : Number, bottom : Number, near : Number, far : Number )
+
+    var newCoords = makeOrthoCoordinates(coordinatesAsArray);  // TODO probably broken syntax
+
+    camera.left = newCoords[0]
+    camera.right = newCoords[1]
+    camera.top = newCoords[2]
+    camera.bottom = newCoords[3]
+    camera.near = newCoords[4]
+    camera.far = newCoords[5]
+    camera.updateProjectionMatrix();
+  }
+
   AFRAME.registerComponent('ortho', {
     init: function () {
       var sceneEl = this.el.sceneEl;
       sceneEl.addEventListener('loaded', () => {
         this.originalCamera = sceneEl.camera;
         this.cameraParent = sceneEl.camera.parent;
-        this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.25,1.6);
+        var orthoCoords = makeOrthoCoordinates();
+        this.orthoCamera = new THREE.OrthographicCamera(orthoCoords[0],orthoCoords[1],orthoCoords[2],orthoCoords[3],orthoCoords[4],orthoCoords[5]);
+        // this.orthoCamera = new THREE.OrthographicCamera(-0.62,0.62,0.3825,-0.3825,0.25,1.6);
+        // this.orthoCamera = new THREE.OrthographicCamera(makeOrthoCoordinates());
+        // this.orthoCamera = new THREE.OrthographicCamera.apply(this, makeOrthoCoordinates);
+
+
         // var camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, near, far );
         // 103 cm projector mount height (let's say 1m)
         // 124 cm screen width x 76.5 cm screen height = 1.24 x 0.765
