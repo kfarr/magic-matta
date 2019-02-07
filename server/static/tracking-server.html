@@ -75,9 +75,9 @@
   // };
   //
   // AFRAME.registerInputMappings(mappings);
-  AFRAME.registerComponent('spawn-projector', {
+  AFRAME.registerComponent('spawn-template', {
     schema: {
-      spawnTemplate: {default: '#projector-template'},
+      spawnTemplate: {default: '#marker-template'},
     },
 
     init: function() {
@@ -103,13 +103,13 @@
       // el.setAttribute('remove-in-seconds', 3);
       // el.setAttribute('forward', 'speed:0.3');
 
-      var thisEl = document.getElementById("crosshairs-preview");
-      el.setAttribute('position', this.getInitialPosition(thisEl));
+      el.setAttribute('position', this.getInitialPosition(this.el));
 
       var worldQuaternion = new THREE.Quaternion();
-      thisEl.object3D.getWorldQuaternion(worldQuaternion);
+      this.el.object3D.getWorldQuaternion(worldQuaternion);
       console.log(worldQuaternion);
 
+      // I think this is for a-frame 8 and above, but not 7
       el.object3D.applyQuaternion(worldQuaternion);
       var scene = document.querySelector('a-scene');
       scene.appendChild(el);
@@ -213,7 +213,7 @@
           </a-entity>
         </template>
 
-        <template id="crosshairs-template">
+        <template id="marker-template">
           <a-entity class="marker">
             <a-entity
              position="0 0 0"
@@ -243,7 +243,7 @@
         </a-entity>
 
         <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" spawn-projector="spawnTemplate:#crosshairs-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+        <a-entity vive-controls="hand: right" spawn-template="spawnTemplate:#marker-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="123 0 0">
             <!-- <a-entity id="projector-preview" projector="Optoma ML750ST">
               <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
@@ -251,7 +251,7 @@
             </a-entity> -->
           </a-entity>
           <a-entity id="controller-adjustment" position="0 -0.03 -0.03" rotation="33 0 0">
-            <a-entity id="crosshairs-preview" position="0 0.005 0" rotation="0 0 0">
+            <a-entity id="marker-preview" position="0 0.005 0" rotation="0 0 0">
               <a-entity
                  position="0 0 -0.001"
                  geometry="primitive: ring; radiusInner: 0.0000001; radiusOuter: 0.04"
@@ -291,7 +291,7 @@
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = A-Frame 'enter-vr' event emitted"><span id="in-vr">❌</span> #3 Now press the "Enter VR" icon in the lower right corner to enter VR. (This gives the app access to headset and controller positions.)</p>
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with 'vive-controls' component and 'hand: right' attribute"><span id="has-right" class="spinner" style="position: relative;">❌</span> #3.5 Make sure the right controller is visible to scene.</p>
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = .client-player entity > 0 in scene"><span id="has-client" class="spinner" style="position: relative;">❌</span> #4 In a separate browser (or even computer) load the <a href="/client.html">"Client"</a> page and display it on your projector in full screen.</p>
-      <p><span id="has-projector">❌</span> #5 Use the right HTC Vive controller to locate the red target shown in your projector. Align the controller target to match and press the `trigger` button.</p>
+      <p class="tooltip is-tooltip-left" data-tooltip="✅ = .marker entity > 0 in scene"><span id="has-marker" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to locate the red target marker shown in your projector. Align the controller target marker to match and press the `trigger` button.</p>
       <p><span id="align-projector">❌</span> #6 Then, on the "Client" follow the setup instructions on the screen and click the green "Init" button.</p>
       <p><a href="#" class="button is-primary">(Button Not Active)</a></p>
     </div>
@@ -344,7 +344,13 @@
         }
       },2000);
 
-
+      var markerSpawnInterval = setInterval(function(){
+        if(document.querySelectorAll(".marker").length > 0) {
+          document.querySelector("#has-marker").textContent = "✅";
+          document.querySelector("#has-marker").classList.remove("spinner");
+          clearInterval(markerSpawnInterval);
+        }
+      },2100);
 
 
     </script>

@@ -320,7 +320,7 @@
           </a-entity>
         </template>
 
-        <template id="crosshairs-template">
+        <template id="marker-template">
           <a-entity class="marker">
             <a-entity
              position="0 0 0"
@@ -394,10 +394,10 @@
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with class '.right-controls'"><span id="has-right" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if right hand control is visible on network.)</p>
       <p class="tooltip is-tooltip-left is-tooltip-multiline" data-tooltip="✅ = window.innerWidth == screen.width && window.innerHeight == screen.height"><span id="has-fullscreen">❌</span> #4 Show this "Client Projector" page in full screen but NOT in a WebVR browser. Make sure no toolbar, bookmark or other browser bars are visible. </p>
 <!-- <input type="button" value="click to go fullscreen" onclick="requestFullScreen()"> -->
-      <p><span id="has-projector">❌</span> #5 Use the right HTC Vive controller to locate the red target shown in your projector. Align the controller target to match and press the `trigger` button.</p>
+      <p class="tooltip is-tooltip-left" data-tooltip="✅ = .marker entity > 0 in scene"><span id="has-marker" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to locate the red target marker shown in your projector. Align the controller marker to match and press the `trigger` button.</p>
       <p><span id="align-projector">❌</span> #6 Press the "Init" button below.</p>
 
-      <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">After you've setup the `server`</a>, project this `client` page down on the floor or surface. Click `init` once `server` has matched the red target, then use controls below to calibrate.</p>
+      <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">After you've setup the `server`</a>, project this `client` page down on the floor or surface. Click `init` once `server` has matched the red target marker, then use controls below to calibrate.</p>
       <p><a onclick="initProjector()" class="button is-primary">Init</a>
         <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
         <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>
@@ -420,7 +420,15 @@
           document.querySelector("#has-right").classList.remove("spinner");
           clearInterval(rightControlClientInterval);
         }
-      },2000);
+      },1900);
+
+      var markerSpawnInterval = setInterval(function(){
+        if(document.querySelectorAll(".marker").length > 0) {
+          document.querySelector("#has-marker").textContent = "✅";
+          document.querySelector("#has-marker").classList.remove("spinner");
+          clearInterval(markerSpawnInterval);
+        }
+      },2100);
 
       // on window resize, check full screen
       var checkFullScreen = function(){
