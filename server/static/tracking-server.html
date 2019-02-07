@@ -78,6 +78,7 @@
   AFRAME.registerComponent('spawn-template', {
     schema: {
       spawnTemplate: {default: '#marker-template'},
+      sourceSelector: {default: 'this'}
     },
 
     init: function() {
@@ -103,16 +104,34 @@
       // el.setAttribute('remove-in-seconds', 3);
       // el.setAttribute('forward', 'speed:0.3');
 
-      el.setAttribute('position', this.getInitialPosition(this.el));
+      if (this.data.sourceSelector == 'this') {
+        sourceEl = this.el;
+      } else {
+        sourceEl = document.querySelectorAll(this.data.sourceSelector)[0];
+      }
+      el.setAttribute('position', this.getInitialPosition(sourceEl));
 
       var worldQuaternion = new THREE.Quaternion();
-      this.el.object3D.getWorldQuaternion(worldQuaternion);
+      sourceEl.object3D.getWorldQuaternion(worldQuaternion);
       console.log(worldQuaternion);
 
-      // I think this is for a-frame 8 and above, but not 7
+      // I think this is for a-frame 8 and above, but not 7. it doesn't appear to break anything in 7.
       el.object3D.applyQuaternion(worldQuaternion);
+
+      // Get the Item's current world coordinates - we're going to place it right where it is!
+   		var thisItemWorldRotation = sourceEl.object3D.getWorldRotation();
+
+       // Fetch the current Item's rotation and convert it to a Euler string
+   		var thisItemWorldRotationX = thisItemWorldRotation._x / (Math.PI / 180);
+   		var thisItemWorldRotationY = thisItemWorldRotation._y / (Math.PI / 180);
+   		var thisItemWorldRotationZ = thisItemWorldRotation._z / (Math.PI / 180);
+   		var originalEulerRotationString = thisItemWorldRotationX + ' ' + thisItemWorldRotationY + ' ' + thisItemWorldRotationZ;
+
+      el.setAttribute('rotation', originalEulerRotationString);
+
       var scene = document.querySelector('a-scene');
       scene.appendChild(el);
+
     },
 
     getInitialPosition: function(spawnerEl) {
@@ -243,7 +262,7 @@
         </a-entity>
 
         <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" spawn-template="spawnTemplate:#marker-template" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+        <a-entity vive-controls="hand: right" spawn-template="spawnTemplate:#marker-template;sourceSelector:#marker-preview;" networked="template:#right-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0.02 -0.06 -0.09" rotation="123 0 0">
             <!-- <a-entity id="projector-preview" projector="Optoma ML750ST">
               <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
