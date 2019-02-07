@@ -168,7 +168,7 @@
     setPlayerHeight();
   }
 
-  function makeOrthoCoordinates(screenWidth = 1.24, screenHeight = 0.765, near = 0.25, far = 1.6) {
+  function makeOrthoCoordinates(screenWidth = 1.90, screenHeight = 1.1875, near = 0.25, far = 1.6) {
     // for defaults, output should be (-0.62,0.62,0.3825,-0.3825,0.25,1.6)
     // for given projector screen width and height and the mount height of the lens of the projector, generate an orthographic camera to match in threejs
 
@@ -181,7 +181,7 @@
     return [screenWidth/-2, screenWidth/2, screenHeight/2, screenHeight/-2, near, far];
   }
 
-  // update ortho coordinates
+  // update ortho coordinates -- TODO need verification
   function updateOrthoCoordinates(coordinatesAsArray) {
     // get the threejs camera object representing ortho camera
     var camera = document.querySelector("[camera]").getObject3D('camera');
