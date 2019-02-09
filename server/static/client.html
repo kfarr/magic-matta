@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.1/bulma-tooltip/dist/css/bulma-tooltip.min.css" integrity="sha256-4sEalG00AgYSQIYA/likT3rU/pElCgDfnyHz/mf+j30=" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"> -->
 
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script> -->
@@ -231,7 +232,7 @@
 
   <body>
 
-    <a-scene ortho gridhelper="size: 5; divisions: 50; colorGrid: fuchsia" networked-scene="
+    <a-scene ortho gridhelper="size: 5; divisions: 50; colorGrid: white" networked-scene="
       room: handcontrollers;
       debug: true;
     ">
@@ -388,11 +389,13 @@
     </a-scene>
 
     <div class="wizard content">
-      <h1 class="title has-text-white">Client Projector</h1>
-      <h4 class="title has-text-white">Open This Page and Show on Projector</h4>
-      <p class="tooltip is-tooltip-left" data-tooltip="✅ = Networked A-Frame onConnect() called"><span id="has-connected" class="spinner" style="position: relative;">❌</span> #1 Setup project following <a class="has-text-primary" href="https://github.com/kfarr/magic-matta/blob/master/README.md#equipment-needed">these instructions</a>. Make sure node server is running on the Server.</p>
-      <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with class '.right-controls'"><span id="has-right" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if right hand control is visible on network.)</p>
-      <p class="tooltip is-tooltip-left is-tooltip-multiline" data-tooltip="✅ = window.innerWidth == screen.width && window.innerHeight == screen.height"><span id="has-fullscreen">❌</span> #4 Show this "Client Projector" page in full screen but NOT in a WebVR browser. Make sure no toolbar, bookmark or other browser bars are visible. </p>
+      <div id="top-half">
+        <h1 class="title has-text-white">Client Projector</h1>
+        <h4 class="title has-text-white">Open This Page and Show on Projector</h4>
+        <p class="tooltip is-tooltip-left" data-tooltip="✅ = Networked A-Frame onConnect() called"><span id="has-connected" class="spinner" style="position: relative;">❌</span> #1 Setup project following <a class="has-text-primary" href="https://github.com/kfarr/magic-matta/blob/master/README.md#equipment-needed">these instructions</a>. Make sure node server is running on the Server.</p>
+        <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with class '.right-controls'"><span id="has-right" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if right hand control is visible on network.)</p>
+        <p class="tooltip is-tooltip-left is-tooltip-multiline" data-tooltip="✅ = window.innerWidth == screen.width && window.innerHeight == screen.height"><span id="has-fullscreen">❌</span> #4 Show this "Client Projector" page in full screen but NOT in a WebVR browser. Make sure no toolbar, bookmark or other browser bars are visible. </p>
+      </div>
 <!-- <input type="button" value="click to go fullscreen" onclick="requestFullScreen()"> -->
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = .marker entity > 0 in scene"><span id="has-marker" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to locate the red target marker shown in your projector. Align the controller marker to match and press the `trigger` button.</p>
       <p><span id="align-projector">❌</span> #6 Press the "Init" button below.</p>
@@ -435,8 +438,13 @@
         if((window.fullScreen) ||
            (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
            document.querySelector("#has-fullscreen").textContent = "✅";
+
+           // document.querySelector("#top-half").classList.add("animated", "fadeOutUp", "delay-2s")
         } else {
            document.querySelector("#has-fullscreen").textContent = "❌";
+
+
+
         }
       }
       window.addEventListener('resize', checkFullScreen, true);
