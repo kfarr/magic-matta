@@ -161,30 +161,31 @@
   }
   function initProjector() {
     // copyProjectorPosition();
-    // console.log("player before copy projector position");
-    // console.log(document.getElementById("player").getAttribute("position"));
-    // console.log(document.getElementById("player").getAttribute("rotation"));
+    console.log("player before copy projector position");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
+    // console.log(document.querySelector("[camera]").getObject3D('camera').getWorldPosition());
 
     copyProjectorPosition(".marker");
     // what is projector position Now? and rotation?
 
-    // console.log("player after copy projector position");
-    // console.log(document.getElementById("player").getAttribute("position"));
-    // console.log(document.getElementById("player").getAttribute("rotation"));
+    console.log("player after copy projector position");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
 
 //    fixFOV(42);
     resetRotation();
     // what is projector position now? and rotation?
-    // console.log("player after reset rotation");
-    // console.log(document.getElementById("player").getAttribute("position"));
-    // console.log(document.getElementById("player").getAttribute("rotation"));
+    console.log("player after reset rotation");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
 
     // document.querySelector(".projector").setAttribute("visible", false);
 //    orthoCamera();
     setPlayerHeight();
-    // console.log("player after set player height");
-    // console.log(document.getElementById("player").getAttribute("position"));
-    // console.log(document.getElementById("player").getAttribute("rotation"));
+    console.log("player after set player height");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
   }
 
   function makeOrthoCoordinates(screenWidth = 1.45, screenHeight = 0.9075, near = 0.25, far = 1.6) {
