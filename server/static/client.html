@@ -98,7 +98,7 @@
     }
   });
 
-  function setPlayerPositionLocation(selector=".projector") {
+  function setPlayerPositionRotation(selector=".projector") {
 // for an object with class projector1 copy its (real world) position and rotation to camera
     var projectorX = document.querySelector(selector).getAttribute("position").x
     var projectorY = document.querySelector(selector).getAttribute("position").y
@@ -164,14 +164,32 @@
     playerEl.setAttribute("position", newPosition);
   }
   function initProjector() {
-    // setPlayerPositionLocation();
-    setPlayerPositionLocation(".projector");
-//    fixFOV(42);
-   resetRotation(); //TODO: this is dangerous magic function
+    // setPlayerPositionRotation();
+    console.log("player before copy projector position");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
+
+    setPlayerPositionRotation(".projector");
+
+    console.log("player after copy projector position");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
+
+    //    fixFOV(42);
+    resetRotation(); //TODO: this is dangerous magic function
+
+    console.log("player after reset rotation");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
+
     // document.querySelector(".projector").setAttribute("visible", false);
-//    orthoCamera();
+    // orthoCamera();
     setPlayerHeight();
-    // id="align-projector"            document.querySelector("#has-fullscreen").textContent = "✅";
+
+    console.log("player after set player height");
+    console.log(document.getElementById("player").getAttribute("position"));
+    console.log(document.getElementById("player").getAttribute("rotation"));
+
     document.querySelector("#align-projector").textContent = "✅";
   }
 
