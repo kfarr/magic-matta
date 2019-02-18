@@ -98,7 +98,7 @@
     }
   });
 
-  function copyProjectorPosition(selector=".projector") {
+  function setPlayerPositionRotation(selector=".projector") {
 // for an object with class projector1 copy its (real world) position and rotation to camera
     var projectorX = document.querySelector(selector).getAttribute("position").x
     var projectorY = document.querySelector(selector).getAttribute("position").y
@@ -106,6 +106,10 @@
     var projectorRX = document.querySelector(selector).getAttribute("rotation").x
     var projectorRY = document.querySelector(selector).getAttribute("rotation").y
     var projectorRZ = document.querySelector(selector).getAttribute("rotation").z
+    console.log("here ye here ye, to all minds who wish to know");
+    console.log("player position and rotation shall be set from selector");
+    console.log("position", `${projectorX} ${projectorY} ${projectorZ}`);
+    console.log("rotation", `${projectorRX} ${projectorRY} ${projectorRZ}`);
 
     var playerEl = document.getElementById("player")
     playerEl.setAttribute("position", `${projectorX} ${projectorY} ${projectorZ}`);
@@ -160,35 +164,36 @@
     playerEl.setAttribute("position", newPosition);
   }
   function initProjector() {
-    // copyProjectorPosition();
+    // setPlayerPositionRotation();
     console.log("player before copy projector position");
     console.log(document.getElementById("player").getAttribute("position"));
     console.log(document.getElementById("player").getAttribute("rotation"));
-    // console.log(document.querySelector("[camera]").getObject3D('camera').getWorldPosition());
 
-    copyProjectorPosition(".marker");
-    // what is projector position Now? and rotation?
+    setPlayerPositionRotation(".projector");
 
     console.log("player after copy projector position");
     console.log(document.getElementById("player").getAttribute("position"));
     console.log(document.getElementById("player").getAttribute("rotation"));
 
-//    fixFOV(42);
-    resetRotation();
-    // what is projector position now? and rotation?
+    //    fixFOV(42);
+    resetRotation(); //TODO: this is dangerous magic function
+
     console.log("player after reset rotation");
     console.log(document.getElementById("player").getAttribute("position"));
     console.log(document.getElementById("player").getAttribute("rotation"));
 
     // document.querySelector(".projector").setAttribute("visible", false);
-//    orthoCamera();
+    // orthoCamera();
     setPlayerHeight();
+
     console.log("player after set player height");
     console.log(document.getElementById("player").getAttribute("position"));
     console.log(document.getElementById("player").getAttribute("rotation"));
+
+    document.querySelector("#align-projector").textContent = "✅";
   }
 
-  function makeOrthoCoordinates(screenWidth = 1.45, screenHeight = 0.9075, near = 0.25, far = 1.6) {
+  function makeOrthoCoordinates(screenWidth = 1.450, screenHeight = 0.9075, near = 0.25, far = 1.6) {
     // for (screenWidth = 1.90, screenHeight = 1.1875, near = 0.25, far = 1.6), output should be (-0.62,0.62,0.3825,-0.3825,0.25,1.6)
     // for given projector screen width and height and the mount height of the lens of the projector, generate an orthographic camera to match in threejs
 
@@ -408,24 +413,28 @@
     </a-scene>
 
     <div class="wizard content">
-      <div id="top-half">
+
         <h1 class="title has-text-white">Client Projector</h1>
         <h4 class="title has-text-white">Open This Page and Show on Projector</h4>
         <p class="tooltip is-tooltip-left" data-tooltip="✅ = Networked A-Frame onConnect() called"><span id="has-connected" class="spinner" style="position: relative;">❌</span> #1 Setup project following <a class="has-text-primary" href="https://github.com/kfarr/magic-matta/blob/master/README.md#equipment-needed">these instructions</a>. Make sure node server is running on the Server.</p>
         <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with class '.right-controls'"><span id="has-right" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if right hand control is visible on network.)</p>
-        <p class="tooltip is-tooltip-left is-tooltip-multiline" data-tooltip="✅ = window.innerWidth == screen.width && window.innerHeight == screen.height"><span id="has-fullscreen">❌</span> #4 Show this "Client Projector" page in full screen but NOT in a WebVR browser. Make sure no toolbar, bookmark or other browser bars are visible. </p>
-      </div>
-<!-- <input type="button" value="click to go fullscreen" onclick="requestFullScreen()"> -->
-      <p class="tooltip is-tooltip-left" data-tooltip="✅ = .marker entity > 0 in scene"><span id="has-marker" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to locate the red target marker shown in your projector. Align the controller marker to match and press the `trigger` button.</p>
-      <p><span id="align-projector">❌</span> #6 Press the "Init" button below.</p>
+        <p class="tooltip is-tooltip-left is-tooltip-multiline" data-tooltip="✅ = window.innerWidth == screen.width && window.innerHeight == screen.height"><span id="has-fullscreen" class="spinner" style="position: relative;">❌</span> #4 Show this "Client Projector" page in full screen (F11) but NOT in a WebVR browser. Make sure no toolbars or browser UI is visible.</p>
 
-      <p><a class="has-text-primary" href="https://github.com/kfarr/aframe-matta">After you've setup the `server`</a>, project this `client` page down on the floor or surface. Click `init` once `server` has matched the red target marker, then use controls below to calibrate.</p>
-      <p><a onclick="initProjector()" class="button is-primary">Init</a>
-        <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
-        <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>
-        <a onclick="movePlayerZ()" class="button">z+</a><a onclick="movePlayerZ(-0.01)" class="button">z-</a>
-        <a onclick="rotatePlayerZ()" class="button">rotateZ+</a><a onclick="rotatePlayerZ(-1)" class="button">rotateZ-</a>
-      </p>
+        <p class="tooltip is-tooltip-left" data-tooltip="✅ = .project entity > 0 in scene"><span id="has-projector" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to place the virtual projector at the same place as the real-life projector and press the `trigger` button.</p>
+        <p><span id="align-projector">❌</span> #6 Press the "Init" button below and then use the controls to calibrate.</p>
+
+        <p><a onclick="initProjector()" class="button is-primary">Init</a>
+          <a onclick="movePlayerX()" class="button">x+</a><a onclick="movePlayerX(-0.01)" class="button">x-</a>
+          <a onclick="movePlayerY()" class="button">y+</a><a onclick="movePlayerY(-0.01)" class="button">y-</a>
+          <a onclick="movePlayerZ()" class="button">z+</a><a onclick="movePlayerZ(-0.01)" class="button">z-</a>
+
+          <input value="0, 0, 1.6"></input>
+
+          <a onclick="rotatePlayerZ()" class="button">rotateZ+</a><a onclick="rotatePlayerZ(-1)" class="button">rotateZ-</a>
+          <a onclick="rotatePlayerZ(45)" class="button">rotateZ45+</a><a onclick="rotatePlayerZ(-45)" class="button">rotateZ-45</a>
+
+        </p>
+
     </div>
 
     <script>
@@ -444,11 +453,22 @@
         }
       },1900);
 
-      var markerSpawnInterval = setInterval(function(){
-        if(document.querySelectorAll(".marker").length > 0) {
-          document.querySelector("#has-marker").textContent = "✅";
-          document.querySelector("#has-marker").classList.remove("spinner");
-          clearInterval(markerSpawnInterval);
+      var projectorSpawnInterval = setInterval(function(){
+        if(document.querySelectorAll(".projector").length > 0) {
+          document.querySelector("#has-projector").textContent = "✅";
+          document.querySelector("#has-projector").classList.remove("spinner");
+          clearInterval(projectorSpawnInterval);
+        }
+      },2100);
+
+      var checkFullScreenInterval = setInterval(function(){
+        if((window.fullScreen) ||
+           (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
+           document.querySelector("#has-fullscreen").textContent = "✅";
+           document.querySelector("#has-fullscreen").classList.remove("spinner");
+           clearInterval(checkFullScreenInterval);
+        } else {
+           document.querySelector("#has-fullscreen").textContent = "❌";
         }
       },2100);
 
@@ -457,13 +477,9 @@
         if((window.fullScreen) ||
            (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
            document.querySelector("#has-fullscreen").textContent = "✅";
-
            // document.querySelector("#top-half").classList.add("animated", "fadeOutUp", "delay-2s")
         } else {
            document.querySelector("#has-fullscreen").textContent = "❌";
-
-
-
         }
       }
       window.addEventListener('resize', checkFullScreen, true);
