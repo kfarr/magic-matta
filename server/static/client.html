@@ -149,7 +149,7 @@
   }
   function resetRotation() {
     var playerEl = document.getElementById("player")
-    playerEl.setAttribute("rotation", "-90 90 0");
+    playerEl.setAttribute("rotation", "-90 90 0"); // TODO don't overwrite z rotation axis
   }
   function rotatePlayerZ(delta = 1) {
     var playerEl = document.getElementById("player")
@@ -193,7 +193,8 @@
     document.querySelector("#align-projector").textContent = "✅";
   }
 
-  function makeOrthoCoordinates(screenWidth = 1.450, screenHeight = 0.9075, near = 0.25, far = 1.6) {
+  function makeOrthoCoordinates(screenWidth = 1.4224, screenHeight = 0.9144, near = 0.25, far = 1.6) {
+    // 142.24Centimeters x 3ft =     x
     // for (screenWidth = 1.90, screenHeight = 1.1875, near = 0.25, far = 1.6), output should be (-0.62,0.62,0.3825,-0.3825,0.25,1.6)
     // for given projector screen width and height and the mount height of the lens of the projector, generate an orthographic camera to match in threejs
 

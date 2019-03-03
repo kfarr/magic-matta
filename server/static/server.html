@@ -11,6 +11,7 @@
 
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script> -->
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
@@ -225,6 +226,12 @@
           </a-entity>
         </template>
 
+        <template id="tracker-controls-template">
+          <a-entity class="tracker-controls">
+            <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
+          </a-entity>
+        </template>
+
         <template id="projector-template">
           <a-entity class="projector" projector="Optoma ML750ST">
             <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
@@ -250,6 +257,13 @@
          </a-entity>
         </template>
 
+
+        <img id="bus-front" src="images/bus-front.png" />
+        <img id="bus-top" src="images/bus-top.png" />
+        <img id="bus-left" src="images/bus-left.png" />
+        <img id="bus-right" src="images/bus-right.png" />
+        <img id="bus-back" src="images/bus-back.png" />
+        <img id="destination-queens" src="images/Q9ALimitedOrangeLED.gif" />
       <!-- /Templates -->
       </a-assets>
 
@@ -261,32 +275,28 @@
             ></a-sphere>
         </a-entity>
 
-        <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity>
-        <a-entity vive-controls="hand: right" spawn-template="spawnTemplate:#projector-template;sourceSelector:#projector-preview;" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+        <!-- <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity> -->
+        <a-entity vive-controls="hand: left" spawn-template="spawnTemplate:#projector-template;sourceSelector:#projector-preview;" networked="template:#right-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0 -0.01 -0.05" rotation="33 0 0">
             <a-entity id="projector-preview" projector="Optoma ML750ST">
               <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
               <a-cylinder rotation="90 0 0" color="gray" height="0.02" radius="0.025"></a-cylinder>
             </a-entity>
           </a-entity>
-          <!-- <a-entity id="controller-adjustment" position="0 -0.03 -0.03" rotation="33 0 0">
-            <a-entity id="marker-preview" position="0 0.005 -0.080" rotation="-90 0 -180">
-              <a-entity
-                 position="0 0 -0.001"
-                 geometry="primitive: ring; radiusInner: 0.0000001; radiusOuter: 0.04"
-                 material="color: red; shader: flat"></a-entity>
-              <a-entity
-                 geometry="primitive: box; width: 0.005; height: 0.08; depth: 0.001"
-                 position="0 0 0"
-                 material="color: white; shader: flat"></a-entity>
-               <a-entity
-                  geometry="primitive: box; width: 0.08; height: 0.005; depth: 0.001"
-                  position="0 0 0"
-                  material="color: white; shader: flat"></a-entity>
-                <a-triangle material="color: white; shader: flat" position="0 0.015 0" rotation="0 0 0" vertex-a="0 0.0075 0" vertex-b="-0.0075 -0.0075 0" vertex-c="0.0075 -0.0075 0"></a-triangle>
-           </a-entity>
-          </a-entity> -->
         </a-entity>
+        <a-entity tracked-controls="idPrefix: OpenVR Tracker" networked="template:#tracker-controls-template;attachTemplateToLocal:true;">
+          <!-- <a-box></a-box> -->
+          <a-entity id="bus" rotation="-270 -180 0" scale="0.02325581395 0.02325581395 0.02325581395">
+            <a-plane src="#bus-front" id="front" position="0 0.181 5.979" rotation="-8 0 0" width="2.59" height="2.7186" ></a-plane>
+            <a-plane src="#bus-top" id="top" position="0 1.485 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" ></a-plane>
+            <a-plane src="#bus-right" id="right"  position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" ></a-plane>
+            <a-plane src="#bus-left" id="left" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" ></a-plane>
+            <a-plane src="#bus-back" id="back" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" ></a-plane>
+            <a-plane id="led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
+            <a-plane id="led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
+          </a-entity>
+        </a-entity>
+
       </a-entity>
 
       <a-entity position="0 0 0"
@@ -371,6 +381,14 @@
         }
       },2100);
 
+      window.addEventListener("gamepadconnected", gamepadHandler);
+
+      var controller = {};
+      var buttonsPressed = [];
+      function gamepadHandler(e) {
+          controller = e.gamepad;
+          console.log("Gamepad: " + controller.id);
+      }
 
     </script>
 
