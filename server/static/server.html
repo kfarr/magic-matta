@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.1/bulma-tooltip/dist/css/bulma-tooltip.min.css" integrity="sha256-4sEalG00AgYSQIYA/likT3rU/pElCgDfnyHz/mf+j30=" crossorigin="anonymous">
 
+
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script> -->
     <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
@@ -152,7 +153,17 @@
 
         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
         <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        <a-asset-item id="vive-controller-obj" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.obj"></a-asset-item>
+        <a-asset-item id="vive-controller-mtl" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.mtl"></a-asset-item>
 
+
+        <img id="bus-front" src="images/bus-front.png" />
+        <img id="bus-top" src="images/bus-top.png" />
+        <img id="bus-left" src="images/bus-left.png" />
+        <img id="bus-right" src="images/bus-right.png" />
+        <img id="bus-back" src="images/bus-back.png" />
+        <img id="destination-queens" src="images/Q9ALimitedOrangeLED.gif" />
+        <a-asset-item id="vive-tracker" src="/assets/tracker/HTC_Vive_Tracker.gltf"></a-asset-item>
         <!-- Templates -->
 
         <!-- Player -->
@@ -207,8 +218,7 @@
           </a-entity>
         </template>
 
-        <a-asset-item id="vive-controller-obj" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.obj"></a-asset-item>
-        <a-asset-item id="vive-controller-mtl" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.mtl"></a-asset-item>
+
 
         <template id="avatar-template">
           <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
@@ -228,7 +238,19 @@
 
         <template id="tracker-controls-template">
           <a-entity class="tracker-controls">
-            <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
+            <a-entity gltf-model="#vive-tracker" rotation="0 180 0" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+        </template>
+
+        <template id="bus-template">
+          <a-entity class="bus" rotation="0 0 0" position="0 -0.03 0.04" scale="0.02325581395 0.02325581395 0.02325581395">
+            <a-plane src="#bus-front" id="front" position="0 0.181 5.979" rotation="-8 0 0" width="2.59" height="2.7186" ></a-plane>
+            <a-plane src="#bus-top" id="top" position="0 1.485 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" ></a-plane>
+            <a-plane src="#bus-right" id="right"  position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" ></a-plane>
+            <a-plane src="#bus-left" id="left" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" ></a-plane>
+            <a-plane src="#bus-back" id="back" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" ></a-plane>
+            <a-plane id="led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
+            <a-plane id="led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
           </a-entity>
         </template>
 
@@ -257,13 +279,6 @@
          </a-entity>
         </template>
 
-
-        <img id="bus-front" src="images/bus-front.png" />
-        <img id="bus-top" src="images/bus-top.png" />
-        <img id="bus-left" src="images/bus-left.png" />
-        <img id="bus-right" src="images/bus-right.png" />
-        <img id="bus-back" src="images/bus-back.png" />
-        <img id="destination-queens" src="images/Q9ALimitedOrangeLED.gif" />
       <!-- /Templates -->
       </a-assets>
 
@@ -276,7 +291,7 @@
         </a-entity>
 
         <!-- <a-entity vive-controls="hand: left" networked="template:#left-controls-template;attachTemplateToLocal:false;"></a-entity> -->
-        <a-entity vive-controls="hand: left" spawn-template="spawnTemplate:#projector-template;sourceSelector:#projector-preview;" networked="template:#right-controls-template;attachTemplateToLocal:false;">
+        <a-entity vive-controls="hand: left" spawn-template="spawnTemplate:#projector-template;sourceSelector:#projector-preview;" networked="template:#left-controls-template;attachTemplateToLocal:false;">
           <a-entity id="controller-adjustment" position="0 -0.01 -0.05" rotation="33 0 0">
             <a-entity id="projector-preview" projector="Optoma ML750ST">
               <a-box position="-0.02 0 -0.06" scale="0.11 0.04 0.11" color="white"></a-box>
@@ -286,15 +301,7 @@
         </a-entity>
         <a-entity tracked-controls="idPrefix: OpenVR Tracker" networked="template:#tracker-controls-template;attachTemplateToLocal:true;">
           <!-- <a-box></a-box> -->
-          <a-entity id="bus" rotation="-270 -180 0" scale="0.02325581395 0.02325581395 0.02325581395">
-            <a-plane src="#bus-front" id="front" position="0 0.181 5.979" rotation="-8 0 0" width="2.59" height="2.7186" ></a-plane>
-            <a-plane src="#bus-top" id="top" position="0 1.485 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" ></a-plane>
-            <a-plane src="#bus-right" id="right"  position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" ></a-plane>
-            <a-plane src="#bus-left" id="left" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" ></a-plane>
-            <a-plane src="#bus-back" id="back" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" ></a-plane>
-            <a-plane id="led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
-            <a-plane id="led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
-          </a-entity>
+          <a-entity networked="template:#bus-template;attachTemplateToLocal:true;"></a-entity>
         </a-entity>
 
       </a-entity>
@@ -318,9 +325,9 @@
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = Networked A-Frame onConnect() called"><span id="has-connected" class="spinner" style="position: relative;">❌</span> #1 Setup project following <a class="has-text-primary" href="https://github.com/kfarr/magic-matta/blob/master/README.md#equipment-needed">these instructions</a>. Run node server on this computer.</p>
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = getVRDisplays returns > 0 results (WebVR 1.1)"><span id="has-vr">❌</span> #2 Run this "Tracking Server" page using a WebVR browser such as <a href="supermedium.com">supermedium</a> with HTC Vive and controllers.</p>
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = A-Frame 'enter-vr' event emitted"><span id="in-vr">❌</span> #3 Now press the "Enter VR" icon in the lower right corner to enter VR. (This gives the app access to headset and controller positions.)</p>
-      <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with 'vive-controls' component and 'hand: right' attribute"><span id="has-right" class="spinner" style="position: relative;">❌</span> #3.5 Make sure the right controller is visible to scene.</p>
+      <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with 'vive-controls' component and 'hand: left' attribute"><span id="has-left" class="spinner" style="position: relative;">❌</span> #3.5 Make sure the left controller is visible to scene.</p>
       <p class="tooltip is-tooltip-left" data-tooltip="✅ = .client-player entity > 0 in scene"><span id="has-client" class="spinner" style="position: relative;">❌</span> #4 In a separate browser (or even computer) load the <a href="/client.html">"Client"</a> page and display it on your projector in full screen.</p>
-      <p class="tooltip is-tooltip-left" data-tooltip="✅ = .projector entity > 0 in scene"><span id="has-projector" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to place the virtual projector in the identical location as the real-life projector and press the `trigger` button.</p>
+      <p class="tooltip is-tooltip-left" data-tooltip="✅ = .projector entity > 0 in scene"><span id="has-projector" class="spinner" style="position: relative;">❌</span> #5 Use the left HTC Vive controller to place the virtual projector in the identical location as the real-life projector and press the `trigger` button.</p>
       <p><span id="align-projector">❌</span> #6 Then, on the "Client" follow the setup instructions on the screen and click the green "Init" button.</p>
       <p><a href="#" class="button is-primary">(Button Not Active)</a></p>
     </div>
@@ -357,11 +364,11 @@
         document.querySelector("#in-vr").textContent = "❌";
       });
 
-      var rightControlServerInterval = setInterval(function(){
-        if(document.querySelectorAll("[vive-controls='hand: right']").length > 0) {
-          document.querySelector("#has-right").textContent = "✅";
-          document.querySelector("#has-right").classList.remove("spinner");
-          clearInterval(rightControlServerInterval);
+      var leftControlServerInterval = setInterval(function(){
+        if(document.querySelectorAll("[vive-controls='hand: left']").length > 0) {
+          document.querySelector("#has-left").textContent = "✅";
+          document.querySelector("#has-left").classList.remove("spinner");
+          clearInterval(leftControlServerInterval);
         }
       },2000);
 

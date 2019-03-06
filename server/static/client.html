@@ -12,6 +12,7 @@
 
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
     <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script> -->
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/easyrtc/easyrtc.js"></script>
@@ -64,42 +65,8 @@
   </head>
 
   <script>
-  // define a new component called "calibration-box"
-  AFRAME.registerComponent('projector1-position', {
-    init: function () {
-      console.log('Hello, World!');
-    },
-
-    // on each tick, get the position of the controllers
-    tick: function (time, timeDelta) {
-      // TODO: only run this code in "calibration mode"
-      // TODO: init these vars in init function, not on each tick
-      if (document.querySelectorAll(".left-controls").length > 0 && document.querySelectorAll(".right-controls").length > 0) {
-        var leftX = document.querySelectorAll(".left-controls")[0].getAttribute("position").x
-        var leftY = document.querySelectorAll(".left-controls")[0].getAttribute("position").y
-        var leftZ = document.querySelectorAll(".left-controls")[0].getAttribute("position").z
-        var rightX = document.querySelectorAll(".right-controls")[0].getAttribute("position").x
-        var rightY = document.querySelectorAll(".right-controls")[0].getAttribute("position").y
-        var rightZ = document.querySelectorAll(".right-controls")[0].getAttribute("position").z
-        var centerX = (leftX + rightX) / 2
-        var centerY = (leftY + rightY) / 2
-        var centerZ = (leftZ + rightZ) / 2
-        var dimensionX = Math.abs(leftX - rightX);
-        var dimensionY = Math.abs(leftY - rightY);
-        var dimensionZ = Math.abs(leftZ - rightZ);
-       // console.log(`centerX: ${centerX}; centerZ: ${centerZ}`);
-       // console.log(this.el.setAttribute("position","x", centerX));
-       // ratio of rectangle width and depth
-        this.el.setAttribute("position", `${centerX} ${centerY} ${centerZ}`);
-        this.el.setAttribute("geometry", "height", dimensionY);
-        this.el.setAttribute("geometry", "width", dimensionX);
-        this.el.setAttribute("geometry", "depth", dimensionZ);
-      }
-    }
-  });
-
   function setPlayerPositionRotation(selector=".projector") {
-// for an object with class projector1 copy its (real world) position and rotation to camera
+    // for an object with class projector1 copy its (real world) position and rotation to camera
     var projectorX = document.querySelector(selector).getAttribute("position").x
     var projectorY = document.querySelector(selector).getAttribute("position").y
     var projectorZ = document.querySelector(selector).getAttribute("position").z
@@ -193,7 +160,8 @@
     document.querySelector("#align-projector").textContent = "✅";
   }
 
-  function makeOrthoCoordinates(screenWidth = 1.4224, screenHeight = 0.9144, near = 0.25, far = 1.6) {
+  function makeOrthoCoordinates(screenWidth = 1.476375, screenHeight = 0.936625, near = 0.25, far = 1.6) {
+    // 36 7/8" x 58 1/8" = 93.6625 x 147.6375 =
     // 142.24Centimeters x 3ft =     x
     // for (screenWidth = 1.90, screenHeight = 1.1875, near = 0.25, far = 1.6), output should be (-0.62,0.62,0.3825,-0.3825,0.25,1.6)
     // for given projector screen width and height and the mount height of the lens of the projector, generate an orthographic camera to match in threejs
@@ -265,6 +233,15 @@
 
         <img id="grid" src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" crossorigin="anonymous">
         <img id="sky" src="http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+        <a-asset-item id="vive-tracker" src="/assets/tracker/HTC_Vive_Tracker.gltf"></a-asset-item>
+        <img id="bus-front" src="images/bus-front.png" />
+        <img id="bus-top" src="images/bus-top.png" />
+        <img id="bus-left" src="images/bus-left.png" />
+        <img id="bus-right" src="images/bus-right.png" />
+        <img id="bus-back" src="images/bus-back.png" />
+        <img id="destination-queens" src="images/Q9ALimitedOrangeLED.gif" />
+        <a-asset-item id="vive-controller-obj" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.obj"></a-asset-item>
+        <a-asset-item id="vive-controller-mtl" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.mtl"></a-asset-item>
 
         <!-- Templates -->
 
@@ -320,9 +297,6 @@
           </a-entity>
         </template>
 
-        <a-asset-item id="vive-controller-obj" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.obj"></a-asset-item>
-        <a-asset-item id="vive-controller-mtl" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.mtl"></a-asset-item>
-
         <template id="avatar-template">
           <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
         </template>
@@ -336,6 +310,24 @@
         <template id="left-controls-template">
           <a-entity class="left-controls">
             <a-entity obj-model="obj: #vive-controller-obj; mtl: #vive-controller-mtl" scale="1 1 1"></a-entity>
+          </a-entity>
+        </template>
+
+        <template id="tracker-controls-template">
+          <a-entity class="tracker-controls">
+            <a-entity gltf-model="#vive-tracker" rotation="0 180 0" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+        </template>
+
+        <template id="bus-template">
+          <a-entity class="bus" rotation="0 0 0" position="0 -0.035 0.03" scale="0.02325581395 0.02325581395 0.02325581395">
+            <a-plane src="#bus-front" id="front" position="0 0.181 5.979" rotation="-8 0 0" width="2.59" height="2.7186" ></a-plane>
+            <a-plane src="#bus-top" id="top" position="0 1.485 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" ></a-plane>
+            <a-plane src="#bus-right" id="right"  position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" ></a-plane>
+            <a-plane src="#bus-left" id="left" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" ></a-plane>
+            <a-plane src="#bus-back" id="back" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" ></a-plane>
+            <a-plane id="led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
+            <a-plane id="led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
           </a-entity>
         </template>
 
@@ -363,7 +355,6 @@
             <a-triangle material="color: white; shader: flat" position="0 0.015 0.001" rotation="0 0 0" vertex-a="0 0.0075 0" vertex-b="-0.0075 -0.0075 0" vertex-c="0.0075 -0.0075 0"></a-triangle>
          </a-entity>
         </template>
-
       <!-- /Templates -->
       </a-assets>
 
@@ -418,10 +409,10 @@
         <h1 class="title has-text-white">Client Projector</h1>
         <h4 class="title has-text-white">Open This Page and Show on Projector</h4>
         <p class="tooltip is-tooltip-left" data-tooltip="✅ = Networked A-Frame onConnect() called"><span id="has-connected" class="spinner" style="position: relative;">❌</span> #1 Setup project following <a class="has-text-primary" href="https://github.com/kfarr/magic-matta/blob/master/README.md#equipment-needed">these instructions</a>. Make sure node server is running on the Server.</p>
-        <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with class '.right-controls'"><span id="has-right" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if right hand control is visible on network.)</p>
+        <p class="tooltip is-tooltip-left" data-tooltip="✅ = entity in scene with class '.left-controls'"><span id="has-left" class="spinner" style="position: relative;">❌</span> #2 and 3 Run the "Tracking Server" on the same network or device as this "Client Projector." (Test to see if left hand control is visible on network.)</p>
         <p class="tooltip is-tooltip-left is-tooltip-multiline" data-tooltip="✅ = window.innerWidth == screen.width && window.innerHeight == screen.height"><span id="has-fullscreen" class="spinner" style="position: relative;">❌</span> #4 Show this "Client Projector" page in full screen (F11) but NOT in a WebVR browser. Make sure no toolbars or browser UI is visible.</p>
 
-        <p class="tooltip is-tooltip-left" data-tooltip="✅ = .project entity > 0 in scene"><span id="has-projector" class="spinner" style="position: relative;">❌</span> #5 Use the right HTC Vive controller to place the virtual projector at the same place as the real-life projector and press the `trigger` button.</p>
+        <p class="tooltip is-tooltip-left" data-tooltip="✅ = .project entity > 0 in scene"><span id="has-projector" class="spinner" style="position: relative;">❌</span> #5 Use the left HTC Vive controller to place the virtual projector at the same place as the real-life projector and press the `trigger` button.</p>
         <p><span id="align-projector">❌</span> #6 Press the "Init" button below and then use the controls to calibrate.</p>
 
         <p><a onclick="initProjector()" class="button is-primary">Init</a>
@@ -446,11 +437,11 @@
         particles.parentNode.removeChild(particles);
       }
 
-      var rightControlClientInterval = setInterval(function(){
-        if(document.querySelectorAll(".right-controls").length > 0) {
-          document.querySelector("#has-right").textContent = "✅";
-          document.querySelector("#has-right").classList.remove("spinner");
-          clearInterval(rightControlClientInterval);
+      var leftControlClientInterval = setInterval(function(){
+        if(document.querySelectorAll(".left-controls").length > 0) {
+          document.querySelector("#has-left").textContent = "✅";
+          document.querySelector("#has-left").classList.remove("spinner");
+          clearInterval(leftControlClientInterval);
         }
       },1900);
 
