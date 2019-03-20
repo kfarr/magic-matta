@@ -85,5 +85,5 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
   console.log('Listening on "http://' + add + ':' + port + '"');
   // opens the url in the default browser
   console.log('Opening in default browser');
-  opn('http://' + add + ':' + port);
+  opn('http://' + add + ':' + port + "/client.html");
 })
