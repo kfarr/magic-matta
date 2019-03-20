@@ -252,8 +252,32 @@
             <a-plane src="#bus-right" id="right"  position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" ></a-plane>
             <a-plane src="#bus-left" id="left" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" ></a-plane>
             <a-plane src="#bus-back" id="back" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" ></a-plane>
-            <a-plane id="led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
-            <a-plane id="led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
+            <!-- <a-plane id="led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
+            <a-plane id="led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane> -->
+
+            <!-- <a-plane class="bus-shadow" src="url(images/bus-shadow.png)" material="alphaTest: 0.5;transparent:true;metalness:1;roughness:1;" position="0 -1.489 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" scale="1.2 1.2 0"></a-plane> -->
+
+            <a-plane class="destination-led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
+            <a-plane class="destination-led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
+            <a-text class="destination-led-back" position="-0.44 1.34 -6.06" value="Q9A" color="#ffbf00" text="font:dejavu" rotation="0 180 0" scale="0.9 0.9 0.9"></a-text>
+
+            <a-image class="lensflare-headlight-left" src="url(images/light_PNG14436.png)" material="alphaTest:0" position="1.08 -0.72 6.18" scale="1.5 1.5 0"></a-image>
+            <a-image class="lensflare-headlight-right" src="url(images/light_PNG14436.png)" material="alphaTest:0" position="-1.11 -0.72 6.18" scale="1.5 1.5 0"></a-image>
+
+            <a-image class="lensflare-tail-light-left" src="url(images/tail-light.png)" position="1.07 -0.16 -6.06" rotation="0 180 0" scale="2 2 0"></a-image>
+            <a-image class="lensflare-tail-light-right" src="url(images/tail-light.png)" position="-1.08 -0.16 -6.06" rotation="0 180 0" scale="2 2 0"></a-image>
+
+            <a-entity class="light-tail-light-right" light="type:spot;angle:17.35;penumbra:0.39;color:#ff0000;intensity:5.5;distance:20" position="-1.1 -0.8 -4.22"></a-entity>
+            <a-entity class="light-tail-light-left" light="type:spot;angle:17.35;penumbra:0.39;color:#ff0000;intensity:5.5;distance:20" position="1.1 -0.8 -4.22"></a-entity>
+
+            <a-entity class="light-headlight-left" light="type:spot;angle:17.35;penumbra:0.39;color:#ffffff;intensity:14.2;distance:20" rotation="0 180 0" position="1.1 -0.9 4.82"></a-entity>
+            <a-entity class="light-headlight-right" light="type:spot;angle:17.35;penumbra:0.39;color:#ffffff;intensity:14.2;distance:20" rotation="0 180 0" position="-1.1 -0.9 4.82"></a-entity>
+
+            <!-- <a-entity class="fire" position="1.06 1.57 -5.69"
+                spe-particles__smoke="texture: images/fog.png; velocity: .4 2 0; velocity-spread: 1.4 0 1.4; particle-count: 15; max-age: 1.5; size: 8,16; opacity: 0,1,0; color: #666,#222; relative: world"
+                position="0 0 -10">
+            </a-entity> -->
+
           </a-entity>
         </template>
 
@@ -320,6 +344,78 @@
 
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
       <a-entity id="particles" particle-system="preset: snow"></a-entity>
+
+
+      <a-entity id="city" rotation="0 -90 0" position="0 0.02 0" scale="0.023255814 0.023255814 0.023255814">
+
+        <a-entity id="model-streetlight" gltf-model="models/streetlightmodel.gltf" position="-3.6 -1.9 8.2" rotation="0 180 0" scale="1.5 1.5 1.5"></a-entity>
+        <a-entity id="light-streetlight" light="type:spot;angle:57.85;penumbra:0.19" position="-3 4.5 7" rotation="-90 0 0"></a-entity>
+
+        <!-- <a-entity id="model-island" gltf-model="models/island-model_gltf_eEz9hdknXOi/model.gltf" position="258.26392787375863 -294.12 99.56119826429342" rotation="0 0 -8.326672684688675e-17" scale="180 150 180" visible=""></a-entity> -->
+        <!-- <a-plane id="grass-plane" material="src:images/grass01.jpg;normalMap:images/grass01_n.jpg;metalnessMap:images/grass01_s.jpg;displacementTextureRepeat:15 15;normalTextureRepeat:15 15;repeat:15 15;metalnessTextureRepeat:15 15" rotation="270 0 0" position="0 -0.2 0" scale="150 150 150" geometry=""></a-plane> -->
+
+        <!-- <a-cylinder id="grass-ground" material="src:images/grass01.jpg;normalMap:images/grass01_n.jpg;metalnessMap:images/grass01_s.jpg;displacementTextureRepeat:15 15;normalTextureRepeat:15 15;repeat:15 15;metalnessTextureRepeat:15 15" rotation="0 0 0" position="0 -5.1 0" height="10" scale="1 1 1" radius="100"></a-cylinder> -->
+        <!-- <a-entity id="messageboard" position="0 0 -12">
+          <a-entity id="messageboard-pole" gltf-model="models/streetlightmodel.gltf" position="4.5 -1.9 3.4" scale="1.5 1.5 1.5"></a-entity>
+          <a-entity id="messageboard-sign" material="color:black" geometry="depth:0.33;width:3.54" position="1.961 4.160 4.66" ></a-entity>
+          <a-entity clock="font: sourcecodepro; color: #ffbf00; position: 0.381 4.03 4.859"></a-entity>
+          <a-text position="0.381 4.36 4.859" value="Howard St Closed at 3rd" color="#ffbf00" font="monoid"></a-text>
+        </a-entity> -->
+
+
+
+
+        <a-entity id="sidewalk" geometry="primitive:plane;height:10;width:30" position="7.72 0.3 0" rotation="270 0 90" material="src:images/cobblestone-sidewalk.jpg;repeat:18 6;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
+
+        <a-entity id="building-cinema" gltf-model="models/Cinema.gltf" position="10.3 0.217 1.220" rotation="0 270 0" scale="0.7 0.7 0.7"></a-entity>
+        <!-- <a-entity id="fire1" position="8.99 8.4 2.1" rotation="0 0 42"
+            spe-particles__sparks="texture: images/square.png; color: yellow, red; particle-count: 10; max-age: 0.5; max-age-spread: 0.4; velocity: 0 5 0; velocity-spread: 0 3 0; wiggle: 1 0 1; wiggle-spread: 5 0 5; emitter-scale: 50; size-spread: .5; randomize-velocity: true"
+            spe-particles__smoke="texture: images/fog.png; velocity: .4 2 0; velocity-spread: 1.4 0 1.4; particle-count: 50; max-age: 4; size: 8,16; opacity: 0,1,0; color: #666,#222"
+            spe-particles__fire="texture: images/explosion_sheet.png; texture-frames: 5 5; velocity: .4 .1 0; acceleration: 0 2 0; acceleration-spread: 0 2 0; velocity-spread: .4 0 .4; particle-count: 15; max-age: 1; size: 4,8; size-spread: 2; opacity: 1,0; wiggle: 0 1 0; blending: additive"
+            position="0 0 -10">
+        </a-entity>
+        <a-entity id="fire2" position="8.99 9.27 1.23" rotation="0 0 42" spe-particles__sparks="texture:images/square.png;color:yellow, red;particleCount:10;maxAge:0.5;maxAgeSpread:0.4;velocity:0 5 0;velocitySpread:0 3 0;wiggle:1;wiggleSpread:5;emitterScale:50;sizeSpread:0.5;randomizeVelocity:true" spe-particles__smoke="texture:images/fog.png;velocity:0.4 2 0;velocitySpread:1.4 0 1.4;particleCount:50;maxAge:4;size:8, 16;opacity:0, 1, 0;color:#666, #222" spe-particles__fire="texture:images/explosion_sheet.png;textureFrames:5 5;velocity:0.4 0.1 0;acceleration:0 2 0;accelerationSpread:0 2 0;velocitySpread:0.4 0 0.4;particleCount:15;size:4, 8;sizeSpread:2;opacity:1, 0;blending:additive" scale="1.5299999999999998 1.1600000000000001 1.28">
+              </a-entity> -->
+
+
+
+        <a-entity id="bus-stop-shelter" gltf-model="models/ccFO2EGGIq9-bus-stop/bust stop 1.gltf" position="5.5 0.25 9.5" rotation="-90 0 0" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity id="bus-stop-advert" geometry="primitive:plane;height:2.5;width:2" position="4.74 1.53 11.57" material="src:images/carrot-advert-lighting.jpg;shader:flat" id="carrot-advert"></a-entity>
+
+        <a-entity id="lane-northbound">
+          <a-entity id="street1" position="2.2 0.25 0" rotation="90 0 0" scale="0.5 0.5 0.5">
+            <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+
+          <a-entity id="street2" position="2.2 0.25 -28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
+            <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+
+          <a-entity id="street3" position="2.2 0.25 28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
+            <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+        </a-entity>
+
+        <a-entity id="lane-southbound" position="-6.3 0 0" rotation="0 180 0">
+          <a-entity id="street1" position="2.2 0.25 0" rotation="90 0 0" scale="0.5 0.5 0.5">
+            <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+
+          <a-entity id="street2" position="2.2 0.25 -28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
+            <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+
+          <a-entity id="street3" position="2.2 0.25 28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
+            <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+          </a-entity>
+        </a-entity>
+        <a-entity id="median" geometry="primitive:plane;height:1.3;width:85.9" position="-3.08 0.26 0" rotation="270 0 90" material="src:images/cobblestone-sidewalk.jpg;repeat:30 1;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
+
+
+      </a-entity>
+
+
+
     </a-scene>
 
     <div class="wizard content">
