@@ -33,10 +33,14 @@ Side view: suggested mounting heigh of 1.5m, depends on your projector's optics 
 ## Software Setup
 * On a PC with HTC Vive, clone the repo, `npm install`, `npm start`
 * Use your favorite webvr enabled browser like Firefox or Supermedium to navigate to localhost:8080/server.html
-* Use the right Vive controller to position the virtual projector to match the real-life position and press the trigger. 
+* Use the right Vive controller to position the virtual projector to match the real-life position and press the trigger.
 * On the same or another computer hooked up to the projector, use any browser (webvr support not required) to open [SERVER IP]:8080/client.html
-* Press the "init" button and use the on-screen adjustment buttons to tweak the alignment of the projector and the actual controller positions. 
+* Press the "init" button and use the on-screen adjustment buttons to tweak the alignment of the projector and the actual controller positions.
 * The bounds of this client projector are now defined.
+
+## Experimental
+Using exokit
+node . -x webvr http://localhost:8080/server.html
 
 ## Future ideas
 * orthogonal camera instead of perspective, see notes in codebase
