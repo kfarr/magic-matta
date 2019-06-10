@@ -50,3 +50,7 @@ node . -x webvr http://localhost:8080/server.html
 * drawing feature (like babypi), start drawing when controller is pointed up like a pen (small end down)
 * Vive tracker support for more inputs
 * physics minigames (see simple boilerplate project https://glitch.com/edit/#!/boiling-alligator?path=index.html:27:10)
+
+Credits:
+- magic wand - https://commons.wikimedia.org/wiki/File:Magic_Wand_Icon_229981_Color.svg
+- magic matta word art - https://makewordart.com/
