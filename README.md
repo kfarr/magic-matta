@@ -1,4 +1,7 @@
 # magic-matta 🏳️‍🌈
+The most up-to-date working code for magic-matta is here: https://github.com/kfarr/aframe-bus
+
+****
 Experiments to create a "magic carpet" type of experience in WebXR using A-Frame, HTC Vive and a projector. ("matta" is swedish for carpet or rug) This is a work in progress and does not work easily without significant manual configuration.
 
 ## Why?
