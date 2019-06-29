@@ -6,5 +6,65 @@
   </head>
   <body>
     <div id="app"></div>
+
+    <a onclick="AFRAME.scenes[0].emit('resetGameState');"><div class="menu-overlay btn btn-outline-secondary"></div></a>
+
+    <script>
+      console.log("Run `makeWASD();` if you need to use a keyboard without a WebVR browser.");
+
+      AFRAME.registerComponent('make-server-if-vr', {
+        init: function () {
+          this.el.sceneEl.addEventListener('enter-vr', function () {
+             console.log("ENTERED VR");
+             makeServer();
+          });
+        }
+      });
+
+      function makeProjector() {
+        AFRAME.scenes[0].setAttribute("orbit-controls", "target: 0 0 0; initialPosition: 0 0.5 0;");
+        document.getElementsByClassName("a-enter-vr-button")[0].hidden = true;
+        // Disabled, not sure why this causes controllers to disappear :(
+        // AFRAME.scenes[0].emit('setClientMode');
+      }
+
+      function makeOrtho() {
+        var cameraEl = document.querySelector("[camera]");
+        cameraEl.setAttribute("ortho", "width: 2.61; height 1.65; near: -100; far: 100");
+        cameraEl.setAttribute("rotation", "-90 0 0");
+      }
+
+      function makeWASD() {
+        // find bus object - make it located reasonable location // detach tracker binding?
+        var controllerEl = document.querySelector("#bus1-controller");
+        controllerEl.removeAttribute("tracked-controls");
+        controllerEl.setAttribute("position", "0 0.1 0");
+        controllerEl.setAttribute("wasd-controls", "acceleration: 6");
+        var cameraEl = document.querySelectorAll("[camera]");
+        cameraEl[0].removeAttribute("wasd-controls");
+        AFRAME.scenes[0].setAttribute("orbit-controls", "target: 0 0 0; initialPosition: 0 0.5 0;");
+        AFRAME.scenes[0].emit('setClientMode');
+      }
+      function makeServer() {
+        // add tracked controller to above thing
+        //    tracked-controls="idPrefix: OpenVR; controller: 2; orientationOffset:-90 180 0"
+        var controllerEl = document.querySelector("#bus1-controller");
+        controllerEl.setAttribute("tracked-controls", "idPrefix: OpenVR; orientationOffset:-90 0 0");
+        controllerEl.setAttribute("bind__tracked-controls", "controller: controls.bus1ControllerId");
+        document.querySelector("#tracker-model").setAttribute("visible", "true");
+        controllerEl.setAttribute("broadcast", "send: position, rotation");
+
+        document.getElementById("leftHand").setAttribute("broadcast", "send: position, rotation");
+        document.getElementById("rightHand").setAttribute("broadcast", "send: position, rotation");
+
+        AFRAME.scenes[0].emit('setServerMode');
+      }
+
+      // document.querySelector('a-scene').addEventListener('enter-vr', function () {
+      //    console.log("ENTERED VR");
+      //    makeServer();
+      // });
+    </script>
+
   </body>
 </html>
