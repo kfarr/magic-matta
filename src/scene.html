@@ -6,17 +6,17 @@
     <a-mixin id="bounce"
     animation__1="property: object3D.rotation.z; easing: linear; from: -45; to: 45; dir: alternate; dur: 500; loop: true"
     animation__2="property: object3D.position.y; easing: linear; from: 0.2; to: 1; dir: alternate; dur: 250; loop: true"></a-mixin>
-    <a-mixin id="peep1" scale="0.1 0.1 0.1" obj-model="obj: url(models/city-builder-obj/chr_worker1.obj); mtl: url(models/city-builder-obj/chr_worker1.mtl)"></a-mixin>
-    <a-mixin id="peep2" scale="0.1 0.1 0.1" obj-model="obj: url(models/city-builder-obj/chr_worker2.obj); mtl: url(models/city-builder-obj/chr_worker2.mtl)"></a-mixin>
-    <a-mixin id="peep3" scale="0.1 0.1 0.1" obj-model="obj: url(models/city-builder-obj/chr_worker3.obj); mtl: url(models/city-builder-obj/chr_worker3.mtl)"></a-mixin>
-    <img id="sky" src="images/sky3.jpg" />
+    <a-mixin id="peep1" scale="0.1 0.1 0.1" obj-model="obj: url(assets/models/city-builder-obj/chr_worker1.obj); mtl: url(assets/models/city-builder-obj/chr_worker1.mtl)"></a-mixin>
+    <a-mixin id="peep2" scale="0.1 0.1 0.1" obj-model="obj: url(assets/models/city-builder-obj/chr_worker2.obj); mtl: url(assets/models/city-builder-obj/chr_worker2.mtl)"></a-mixin>
+    <a-mixin id="peep3" scale="0.1 0.1 0.1" obj-model="obj: url(assets/models/city-builder-obj/chr_worker3.obj); mtl: url(assets/models/city-builder-obj/chr_worker3.mtl)"></a-mixin>
+    <img id="sky" src="assets/img/sky3.jpg" />
 
     <!-- Menu Images. -->
-    <img id="pageIconImg" src="images/arrowDownIcon.png" crossorigin>
-    <img id="sliceImg" src="images/slice9_tooltip.png" crossorigin>
-    <!-- <img id="logoImg" src="images/magic-matta-square.png" crossorigin> -->
-    <img id="headerImg" src="images/header-magic-matta.png" crossorigin>
-    <img id="gameImg" src="images/game-logo-peeps-on-the-bus.png" crossorigin>
+    <img id="pageIconImg" src="assets/img/arrowDownIcon.png" crossorigin>
+    <img id="sliceImg" src="assets/img/slice9_tooltip.png" crossorigin>
+    <!-- <img id="logoImg" src="assets/img/magic-matta-square.png" crossorigin> -->
+    <img id="headerImg" src="assets/img/header-magic-matta.png" crossorigin>
+    <img id="gameImg" src="assets/img/game-logo-peeps-on-the-bus.png" crossorigin>
 
     <!-- Menu Base mixins. -->
     <a-mixin id="font" text="font: roboto"></a-mixin>
@@ -37,27 +37,27 @@
 
     <!-- Bus Template - template component style -->
     <script id="bustemplate" type="text/html">
-      <a-plane class="bus-front" src="url(images/bus-front.png)" material="alphaTest: 0.5;" position="0 0.181 5.979" rotation="-8 0 0" width="2.59" height="2.7186" shadow="receive:false"></a-plane>
-      <a-plane class="bus-top" src="url(images/bus-top-4278.png)" material="alphaTest: 0.5;" position="0 1.485 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" shadow="receive:false"></a-plane>
-      <a-plane class="bus-right" src="url(images/bus-right.png)" material="alphaTest: 0.5;" position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" shadow="receive:false"></a-plane>
-      <a-plane class="bus-left" src="url(images/bus-left.png)"  material="alphaTest: 0.5;" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" shadow="receive:false"></a-plane>
-      <a-plane class="bus-back" src="url(images/bus-back.png)" material="alphaTest: 0.5;" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" shadow="receive:false"></a-plane>
-      <a-plane class="bus-shadow" src="url(images/bus-shadow.png)" material="alphaTest: 0.5;transparent:true;metalness:1;roughness:1;" position="0 -1.489 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" scale="1.2 1.2 0"></a-plane>
+      <a-plane class="bus-front" src="url(assets/img/bus-front.png)" material="alphaTest: 0.5;" position="0 0.181 5.979" rotation="-8 0 0" width="2.59" height="2.7186" shadow="receive:false"></a-plane>
+      <a-plane class="bus-top" src="url(assets/img/bus-top-4278.png)" material="alphaTest: 0.5;" position="0 1.485 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" shadow="receive:false"></a-plane>
+      <a-plane class="bus-right" src="url(assets/img/bus-right.png)" material="alphaTest: 0.5;" position="-1.295 0 0" rotation="0 -90 0" width="12.459" height="3.001" shadow="receive:false"></a-plane>
+      <a-plane class="bus-left" src="url(assets/img/bus-left.png)"  material="alphaTest: 0.5;" position="1.295 0 0" rotation="0 90 0" width="12.459" height="3.001" shadow="receive:false"></a-plane>
+      <a-plane class="bus-back" src="url(assets/img/bus-back.png)" material="alphaTest: 0.5;" position="0 0.181 -6.040" rotation="0 180 0" width="2.59" height="2.7186" shadow="receive:false"></a-plane>
+      <a-plane class="bus-shadow" src="url(assets/img/bus-shadow.png)" material="alphaTest: 0.5;transparent:true;metalness:1;roughness:1;" position="0 -1.489 -0.1" rotation="-90 -90 0" width="11.879" height="2.59" scale="1.2 1.2 0"></a-plane>
       <a-plane class="destination-led-front" position="0 1.23 5.84" rotation="-7.2 0 0" height="0.19" width="1.66" material="shader:gif;src:#destination-queens;"></a-plane>
       <a-plane class="destination-led-side" position="-1.3 0.98 3.75" rotation="0 -90 0" height="0.15" width="1.32" material="shader:gif;src:#destination-queens;"></a-plane>
       <a-text class="destination-led-back" position="-0.44 1.34 -6.06" value="Q9A" color="#ffbf00" text="font:dejavu" rotation="0 180 0" scale="0.9 0.9 0.9"></a-text>
-      <a-image class="lensflare-headlight-left" src="url(images/light_PNG14436.png)" material="alphaTest:0" position="1.08 -0.72 6.18" scale="1.5 1.5 0"></a-image>
-      <a-image class="lensflare-headlight-right" src="url(images/light_PNG14436.png)" material="alphaTest:0" position="-1.11 -0.72 6.18" scale="1.5 1.5 0"></a-image>
-      <a-image class="lensflare-tail-light-left" src="url(images/tail-light.png)" position="1.07 -0.16 -6.06" rotation="0 180 0" scale="2 2 0"></a-image>
-      <a-image class="lensflare-tail-light-right" src="url(images/tail-light.png)" position="-1.08 -0.16 -6.06" rotation="0 180 0" scale="2 2 0"></a-image>
+      <a-image class="lensflare-headlight-left" src="url(assets/img/light_PNG14436.png)" material="alphaTest:0" position="1.08 -0.72 6.18" scale="1.5 1.5 0"></a-image>
+      <a-image class="lensflare-headlight-right" src="url(assets/img/light_PNG14436.png)" material="alphaTest:0" position="-1.11 -0.72 6.18" scale="1.5 1.5 0"></a-image>
+      <a-image class="lensflare-tail-light-left" src="url(assets/img/tail-light.png)" position="1.07 -0.16 -6.06" rotation="0 180 0" scale="2 2 0"></a-image>
+      <a-image class="lensflare-tail-light-right" src="url(assets/img/tail-light.png)" position="-1.08 -0.16 -6.06" rotation="0 180 0" scale="2 2 0"></a-image>
       <a-entity class="light-tail-light-right" light="type:spot;angle:17.35;penumbra:0.39;color:#ff0000;intensity:5.5;distance:20" position="-1.1 -0.8 -4.22"></a-entity>
       <a-entity class="light-tail-light-left" light="type:spot;angle:17.35;penumbra:0.39;color:#ff0000;intensity:5.5;distance:20" position="1.1 -0.8 -4.22"></a-entity>
       <a-entity class="light-headlight-left" light="type:spot;angle:17.35;penumbra:0.39;color:#ffffff;intensity:14.2;distance:20" rotation="0 180 0" position="1.1 -0.9 4.82"></a-entity>
       <a-entity class="light-headlight-right" light="type:spot;angle:17.35;penumbra:0.39;color:#ffffff;intensity:14.2;distance:20" rotation="0 180 0" position="-1.1 -0.9 4.82"></a-entity>
     </script>
-    <img id="destination-queens" src="images/Q9ALimitedOrangeLED.gif" />
-    <a-asset-item id="new-bus" src="models/new-bus/GLTF/BUS.gltf"></a-asset-item>
-    <a-asset-item id="vive-tracker" src="models/tracker/HTC_Vive_Tracker.gltf"></a-asset-item>
+    <img id="destination-queens" src="assets/img/Q9ALimitedOrangeLED.gif" />
+    <a-asset-item id="new-bus" src="assets/models/new-bus/GLTF/BUS.gltf"></a-asset-item>
+    <a-asset-item id="vive-tracker" src="assets/models/tracker/HTC_Vive_Tracker.gltf"></a-asset-item>
     <a-asset-item id="vive-controller-obj" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.obj"></a-asset-item>
     <a-asset-item id="vive-controller-mtl" src="https://cdn.aframe.io/controllers/vive/vr_controller_vive.mtl"></a-asset-item>
 
@@ -176,7 +176,7 @@
   </a-entity>
 
   <a-entity id="game-world" bind__position="computedPositionString" bind__rotation="computedRotationString" bind__scale="computedScaleString" broadcast="send: position, rotation, scale">
-    <a-cylinder id="grass-ground" material="src:images/grass01.jpg;normalMap:images/grass01_n.jpg;metalnessMap:images/grass01_s.jpg;displacementTextureRepeat:30 30;normalTextureRepeat:30 30;repeat:30 30;metalnessTextureRepeat:30 30;color:#f6ff49;" rotation="0 0 0" position="0 -5 0" height="10" scale="1 1 1" radius="200"></a-cylinder>
+    <a-cylinder id="grass-ground" material="src:assets/img/grass01.jpg;normalMap:assets/img/grass01_n.jpg;metalnessMap:assets/img/grass01_s.jpg;displacementTextureRepeat:30 30;normalTextureRepeat:30 30;repeat:30 30;metalnessTextureRepeat:30 30;color:#f6ff49;" rotation="0 0 0" position="0 -5 0" height="10" scale="1 1 1" radius="200"></a-cylinder>
 
     <a-entity environment="seed: 8;
       skyType: gradient;
@@ -199,11 +199,11 @@
       gridColor: #c5a543;
       shadow: false" position="0 -0.1 0" scale="8 8 8"></a-entity>
 
-    <a-entity class="model-streetlight" gltf-model="models/streetlightmodel.gltf" position="-3.6 -1.9 8.2" rotation="0 180 0" scale="1.5 1.5 1.5"></a-entity>
+    <a-entity class="model-streetlight" gltf-model="assets/models/streetlightmodel.gltf" position="-3.6 -1.9 8.2" rotation="0 180 0" scale="1.5 1.5 1.5"></a-entity>
     <a-entity class="light-streetlight" light="type:spot;angle:57.85;penumbra:0.19" position="-3 4.5 7" rotation="-90 0 0"></a-entity>
 
     <a-entity id="messageboard" position="0 0 -12">
-      <a-entity class="messageboard-pole" gltf-model="models/streetlightmodel.gltf" position="4.5 -1.9 3.4" scale="1.5 1.5 1.5"></a-entity>
+      <a-entity class="messageboard-pole" gltf-model="assets/models/streetlightmodel.gltf" position="4.5 -1.9 3.4" scale="1.5 1.5 1.5"></a-entity>
       <a-entity class="messageboard-sign" material="color:black" geometry="depth:0.33;width:3.54" position="1.961 4.160 4.66" ></a-entity>
       <a-entity clock="font: sourcecodepro; color: #ffbf00; position: 0.381 4.03 4.859"></a-entity>
       <a-text position="0.381 4.36 4.859" value="Howard St Closed at 3rd" color="#ffbf00" font="monoid"></a-text>
@@ -219,10 +219,10 @@
       ></a-entity>
       <a-entity id="peepsParent1" draw-stop-peeps="boardingPeepId: boardingPeep1" bind__draw-stop-peeps="stopPeeps: game.stop1Peeps" position="0 0 -1">
       </a-entity>
-      <a-entity class="bus-stop-sidewalk" geometry="primitive:plane;height:5;width:15" position="1.5 0.26 3" rotation="270 0 90" material="src:images/cobblestone-sidewalk.jpg;repeat:9 3;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
-      <a-image class="bus-stop-stencil" src="url(images/stop-bus.png)" material="alphaTest:0;opacity:0.5;" rotation="270 270 90" position="-4.7 0.02 3" scale="6 8 6"></a-image>
-      <a-entity class="bus-stop-shelter" gltf-model="models/ccFO2EGGIq9-bus-stop/bust stop 1.gltf" position="1 0.25 0" rotation="-90 0 0" scale="0.001 -0.001 0.001"></a-entity>
-      <a-entity class="bus-stop-advert" geometry="primitive:plane;height:2.5;width:2" position="0.24 1.53 2.07" material="src:images/carrot-advert-lighting.jpg;shader:flat"></a-entity>
+      <a-entity class="bus-stop-sidewalk" geometry="primitive:plane;height:5;width:15" position="1.5 0.26 3" rotation="270 0 90" material="src:assets/img/cobblestone-sidewalk.jpg;repeat:9 3;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
+      <a-image class="bus-stop-stencil" src="url(assets/img/stop-bus.png)" material="alphaTest:0;opacity:0.5;" rotation="270 270 90" position="-4.7 0.02 3" scale="6 8 6"></a-image>
+      <a-entity class="bus-stop-shelter" gltf-model="assets/models/ccFO2EGGIq9-bus-stop/bust stop 1.gltf" position="1 0.25 0" rotation="-90 0 0" scale="0.001 -0.001 0.001"></a-entity>
+      <a-entity class="bus-stop-advert" geometry="primitive:plane;height:2.5;width:2" position="0.24 1.53 2.07" material="src:assets/img/carrot-advert-lighting.jpg;shader:flat"></a-entity>
       <a-entity id="bus-stop-1-marker" bind__visible="game.stop1Peeps !== 0" position="-2.536 0.5 -0.932">
         <a-ring class="marker-pulsating" color="yellow"
         animation__1="property: radius-inner; from: 2; to: 7; dir: alternate; dur: 1000; loop: true"
@@ -241,10 +241,10 @@
         <a-entity id="roberta" mixin="peep2 bounce" position="0 0.2 -1" rotation="0 270 0"></a-entity>
         <a-entity id="tom" mixin="peep3 bounce" position="0 0.2 1" rotation="0 270 0"></a-entity> -->
       </a-entity>
-      <a-entity class="bus-stop-sidewalk" geometry="primitive:plane;height:5;width:15" position="1.5 0.26 3" rotation="270 0 90" material="src:images/cobblestone-sidewalk.jpg;repeat:9 3;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
-      <a-image class="bus-stop-stencil" src="url(images/stop-bus.png)" material="alphaTest:0;opacity:0.5;" rotation="270 270 90" position="-4.7 0.02 3" scale="6 8 6"></a-image>
-      <a-entity class="bus-stop-shelter" gltf-model="models/ccFO2EGGIq9-bus-stop/bust stop 1.gltf" position="1 0.25 0" rotation="-90 0 0" scale="0.001 -0.001 0.001"></a-entity>
-      <a-entity class="bus-stop-advert" geometry="primitive:plane;height:2.5;width:2" position="0.24 1.53 2.07" material="src:images/carrot-advert-lighting.jpg;shader:flat"></a-entity>
+      <a-entity class="bus-stop-sidewalk" geometry="primitive:plane;height:5;width:15" position="1.5 0.26 3" rotation="270 0 90" material="src:assets/img/cobblestone-sidewalk.jpg;repeat:9 3;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
+      <a-image class="bus-stop-stencil" src="url(assets/img/stop-bus.png)" material="alphaTest:0;opacity:0.5;" rotation="270 270 90" position="-4.7 0.02 3" scale="6 8 6"></a-image>
+      <a-entity class="bus-stop-shelter" gltf-model="assets/models/ccFO2EGGIq9-bus-stop/bust stop 1.gltf" position="1 0.25 0" rotation="-90 0 0" scale="0.001 -0.001 0.001"></a-entity>
+      <a-entity class="bus-stop-advert" geometry="primitive:plane;height:2.5;width:2" position="0.24 1.53 2.07" material="src:assets/img/carrot-advert-lighting.jpg;shader:flat"></a-entity>
       <a-entity id="bus-stop-2-marker" bind__visible="game.bus1Peeps > 0" position="-2.536 0.5 -0.932">
         <a-ring class="marker-pulsating" color="yellow"
         animation__1="property: radius-inner; from: 2; to: 7; dir: alternate; dur: 1000; loop: true"
@@ -256,29 +256,29 @@
 
     <a-entity id="lane-northbound">
       <a-entity class="street" position="2.2 0.25 0" rotation="90 0 0" scale="0.5 0.5 0.5">
-        <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity gltf-model="assets/models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
       </a-entity>
       <a-entity class="street" position="2.2 0.25 -28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
-        <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity gltf-model="assets/models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
       </a-entity>
       <a-entity class="street" position="2.2 0.25 28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
-        <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity gltf-model="assets/models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
       </a-entity>
     </a-entity>
 
     <a-entity id="lane-southbound" position="-6.3 0 0" rotation="0 180 0">
       <a-entity class="street" position="2.2 0.25 0" rotation="90 0 0" scale="0.5 0.5 0.5">
-        <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity gltf-model="assets/models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
       </a-entity>
       <a-entity class="street" position="2.2 0.25 -28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
-        <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity gltf-model="assets/models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
       </a-entity>
       <a-entity class="street" position="2.2 0.25 28.68" rotation="90 0 0" scale="0.5 0.5 0.5">
-        <a-entity gltf-model="models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
+        <a-entity gltf-model="assets/models/street-7aKNh-4MGdK/scene.gltf" scale="0.001 0.001 0.001"></a-entity>
       </a-entity>
     </a-entity>
 
-    <a-entity id="median" geometry="primitive:plane;height:1.3;width:85.9" position="-3.08 0.26 0" rotation="270 0 90" material="src:images/cobblestone-sidewalk.jpg;repeat:30 1;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
+    <a-entity id="median" geometry="primitive:plane;height:1.3;width:85.9" position="-3.08 0.26 0" rotation="270 0 90" material="src:assets/img/cobblestone-sidewalk.jpg;repeat:30 1;color:#f4fff7;metalness:1;roughness:0.84"></a-entity>
     <a-entity light="intensity:0.6;castShadow:true" position="-0.5 1 1"></a-entity>
     <a-entity id="ambient" light="color:#BBB;type:ambient;intensity:0.1"></a-entity>
   </a-entity> <!-- closing game-world entity -->
