@@ -13,3 +13,10 @@ io.on('connection', function (socket) {
     // console.log(data);
   });
 });
+
+console.log("Yo, there's some important information you should know.");
+console.log("For instance, what's your IP?");
+
+require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+  console.log('Listening on "http://' + add + ':' + port + '"');
+})
