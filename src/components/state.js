@@ -29,6 +29,8 @@ const initialState = {
   }
 }
 
+// used with menu
+AFRAME.registerComponent('raycastable', {});
 
 // aframe-state-component definition.
 AFRAME.registerState({
@@ -38,7 +40,7 @@ AFRAME.registerState({
   // State changes are done via events and are handled here.
   handlers: {
     resetGameState: function (state) {
-      console.log("Reset Game State Requested");  
+      console.log("Reset Game State Requested");
       Object.assign(state.game, initialState.game);
       AFRAME.scenes[0].systems.broadcast.socket.emit("message", "yo");
     },

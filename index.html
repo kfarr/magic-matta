@@ -3,6 +3,26 @@
     <title>Magic Matta - Peeps on the Bus</title>
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="build/build.js"></script>
+    <style>
+      .menu-overlay {
+         z-index: 99999;
+         position: fixed;
+         top: 20px;
+         right: 20px;
+         box-sizing: border-box;
+         padding: 1.5em;
+         width: 60px;
+         height: 60px;
+         padding-bottom: 0px;
+         background: rgba(0, 0, 0, 0.5) url(./assets/images/hamburger-white.png) center no-repeat;
+         background-size: 40px 40px;
+         font-family: Source Sans Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
+      }
+      .menu-overlay:hover {
+        background: rgba(0, 0, 0, 0.2) url(./assets/images/hamburger-white.png) center no-repeat;
+        background-size: 40px 40px;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
