@@ -1,6 +1,6 @@
 :: This is a convenience launcher for Windows assuming:
 :: (1) SteamVR is installed and you've run room setup with the border of your play area
-:: (2) You've already run npm install on project root directory and server/ directory
+:: (2) You've already run npm install on magic-matta base directory and server/ directory
 :: (3) You've already compiled a compatible version of exokit in ../exokit/
 :: (4) You understand how to configure the rest of this project.
 ::
