@@ -1,6 +1,6 @@
 AFRAME.registerComponent('clock', {
   schema: {
-    position: {type: 'vec3', default: {x: -.75, y: 1.75, z: -1.75}},
+    position: {type: 'vec3', default: {x: -0.75, y: 1.75, z: -1.75}},
     color: {type: 'color', default: '#0f0'},
     font: {type: 'string', default: 'monoid'}
   },

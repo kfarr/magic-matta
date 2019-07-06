@@ -33,7 +33,7 @@ AFRAME.registerComponent('ortho', {
   },
   update: function () {
     var sceneEl = this.el.sceneEl;
-    threeCamera = sceneEl.camera;
+    var threeCamera = sceneEl.camera;
     threeCamera.left = this.data.width / -2;
     threeCamera.right = this.data.width / 2;
     threeCamera.top = this.data.height / 2;
