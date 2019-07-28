@@ -44,6 +44,8 @@
       function makeProjector() {
         AFRAME.scenes[0].setAttribute("orbit-controls", "target: 0 0 0; initialPosition: 0 0.5 0;");
         document.getElementsByClassName("a-enter-vr-button")[0].hidden = true;
+        AFRAME.scenes[0].camera.zoom = 2;
+        AFRAME.scenes[0].camera.updateProjectionMatrix();
         // Disabled, not sure why this causes controllers to disappear :(
         // AFRAME.scenes[0].emit('setClientMode');
       }
