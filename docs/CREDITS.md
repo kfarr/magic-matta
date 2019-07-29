@@ -1,17 +1,5 @@
-# aframe-bus
-This experiment originally started to make a city "paper" bus in XR form inspired by #Codevember 2018. It eventually morphed into a more complicated project.
-
-## Running bus tracker broadcaster app in exokit:
-Tested on Windows 10 PC with HTC Vive and Trackers. It's recommended that you run SteamVR Room Setup and set the play zone to match exactly the dimensions of your projector screen area.
-0) Clone this repo
-1) Open a command shell in this repo's /server directory and run:
-`npm run forever` (after running `npm install` once)
-2) Navigate back to this repo's root directory and run:
-`http-server` (install with `npm install -g http-server` first if you don't have already)
-2) Note the IP address when you run the above, use this to update the `url` value on the `broadcast` component on the `a-scene` entity. Use port 12000, so your attribute will look something like: `broadcast="url: http://192.168.1.1:12000"`
-4) Open another command shell in your exokit directory (after building exokit from repo HASH value e5d38a6ca5f2c5cc03f79e0b5ec8d0fcad6c142a) then run:
-`node . -x webvr http://localhost:8080/bus-broadcast.html`
-5) On another machine attached to a projector pointed at the floor, use the IP address noted in (1) and open [localip]:8080/bus-broadcast.html in any browser. Open the console and run `makeProjector();` Do not enter VR mode, instead use browser Fullscreen to stretch 3d view to full edges. Use the mouse to click, drag and "double drag" (using middle mouse button or two fingers touchpad) to adjust the projector's camera position while using the VR headset and tracked object to manually calibrate the projector.
+# Credits
+This rebased branch of magic matta uses creatives from the [A-Frame Bus repo](https://github.com/kfarr/aframe-bus) developed from Codevember inspiration prompts during Codevember 2018.
 
 ## Quick links to Codevember 2018 static pages
 * https://kfarr.github.io/aframe-bus/index.html
