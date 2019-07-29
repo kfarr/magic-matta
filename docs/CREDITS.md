@@ -112,3 +112,6 @@ https://vimeo.com/stock/clip-298549147-a-white--delivery-truck-with-a-trailer-dr
 
 Caltrain paper bus:
 https://cptdb.ca/topic/9470-papertrain-thread/
+
+- magic wand - https://commons.wikimedia.org/wiki/File:Magic_Wand_Icon_229981_Color.svg
+- magic matta word art - https://makewordart.com/
