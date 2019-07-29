@@ -10,7 +10,9 @@ This requires special hardware to run, explained below in detail. This project a
 Photo Credits: [Mariah Tiffany](http://www.mariahtiffany.com/)
 
 ## Who and Why?
-This project was [created during the Gray Area Foundation 2019.1 Incubator by Kieran Farr](https://medium.com/@kfarr/creating-magic-matta-for-the-2019-1-gray-area-showcase-37df8f5d8aa0). )[All other model and software credits found here](/docs/CREDITS.md#credits).) Here is a quick summary of the project motivations:
+This project was [created during the Gray Area Foundation 2019.1 Incubator by Kieran Farr](https://medium.com/@kfarr/creating-magic-matta-for-the-2019-1-gray-area-showcase-37df8f5d8aa0). ([All other model and software credits found here](/docs/CREDITS.md#credits).)
+
+Here is a quick summary of the project motivations:
 * Provide a VR experience that kids can see without a headset. Create a fun toy that can also teach things
 * Experiment with different input styles -- what can you do with many controllers with no buttons?
 * Try to have "multimodal" experience (allow simultaneous headset and projector use with synced scene)
@@ -54,7 +56,3 @@ node . -x webvr http://localhost:8080/server.html
 * drawing feature (like babypi), start drawing when controller is pointed up like a pen (small end down)
 * Vive tracker support for more inputs
 * physics minigames (see simple boilerplate project https://glitch.com/edit/#!/boiling-alligator?path=index.html:27:10)
-
-Credits:
-- magic wand - https://commons.wikimedia.org/wiki/File:Magic_Wand_Icon_229981_Color.svg
-- magic matta word art - https://makewordart.com/
