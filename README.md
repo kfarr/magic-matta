@@ -1,6 +1,5 @@
 <img alt="Magic Matta" src="./assets/img/header-magic-matta.png" />
 
-****
 <b>Magic Matta</b> renders "magic carpet" style games and experiences for children and children at heart using physical toy "controllers" tracked with HTC Vive Trackers combined with a top-down projector display.
 
 This requires special hardware to run, explained below in detail. This project attempts to use open-source tools such as WebXR and A-Frame where practical. (Why the name? "matta" is swedish for carpet or rug and Magic Carpet is a reserved trademark.) This is a work in progress and does not work easily without significant manual configuration.
@@ -12,7 +11,7 @@ This requires special hardware to run, explained below in detail. This project a
 * Uses HTC Vive instead of computer vision for higher accuracy and lower latency of toy tracking making development simpler by ignoring CV complexities
 
 ## Pictures
-<img width="33%" src="./docs/MAGIC-MATTA-20190620_173429.jpg" /> <img width="33%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_13.jpg" /> <img width="33%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_15.jpg" />
+<img width="30%" src="./docs/MAGIC-MATTA-20190620_173429.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_13.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_15.jpg" />
 
 # Project Setup Instructions
 
