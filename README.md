@@ -4,14 +4,19 @@
 
 This requires special hardware to run, explained below in detail. This project attempts to use open-source tools such as WebXR and A-Frame where practical. (Why the name? "matta" is swedish for carpet or rug and Magic Carpet is a reserved trademark.) This is a work in progress and does not work easily without significant manual configuration.
 
-## Why?
-* XR experience that kids can see without needing headset. Try to create a fun toy that can also teach things
-* Experimenting with different input styles -- what can you do without buttons?
-* Try to have "multimodal" experience (allow simultaneous headset and projector use with synced scene)
-* Uses HTC Vive instead of computer vision for higher accuracy and lower latency of toy tracking making development simpler by ignoring CV complexities
-
 ## Pictures
 <img width="30%" src="./docs/MAGIC-MATTA-20190620_173429.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_13.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_15.jpg" />
+
+Photo Credits: [Mariah Tiffany](http://www.mariahtiffany.com/)
+
+## Who and Why?
+This project was [created during the Gray Area Foundation 2019.1 Incubator by Kieran Farr](https://medium.com/@kfarr/creating-magic-matta-for-the-2019-1-gray-area-showcase-37df8f5d8aa0). [All other model and software credits found here](/docs/CREDITS.md#credits).
+
+Read more about the inspiration and the Gray Area 2019.1 Incubator [here](https://medium.com/@kfarr/creating-magic-matta-for-the-2019-1-gray-area-showcase-37df8f5d8aa0), but here is a quick summary of the project motivations:
+* Provide a VR experience that kids can see without a headset. Create a fun toy that can also teach things
+* Experiment with different input styles -- what can you do with many controllers with no buttons?
+* Try to have "multimodal" experience (allow simultaneous headset and projector use with synced scene)
+* Uses HTC Vive instead of computer vision for higher accuracy and lower latency of toy tracking making development simpler by ignoring CV complexities
 
 # Project Setup Instructions
 
