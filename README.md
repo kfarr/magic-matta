@@ -22,6 +22,9 @@ Here is a quick summary of the project motivations:
 
 ## Step 1 - Pre-Requisite Equipment
 Let's start with hardware requirements before we get too excited about software setup.
+
+NOTE: Needs links for toy to Tracker adapter.
+
 * 1x PC with HTC Vive with system specs capable of supporting modern VR experiences.
 * 1x projector mounted about off the ground pointing downward at the floor that makes an approximately 6' (2m) diagonal screen projection. (You can get started without this, but it won't be complete without. [A versatile starter option is the Optoma ML750ST micro-projector with 1/4" tripod mounts](https://www.amazon.com/Optoma-ML750ST-Ultra-Compact-Projector-Enabled/dp/B07GWT1MCC) which allows you to mount it with something like [this arm](https://www.amazon.com/Manfrotto-244-Variable-Friction-Bracket/dp/B000J4FONU) and [this clamp](https://www.amazon.com/Manfrotto-035RL-Super-Clamp-Standard/dp/B0018LQVIA/).)
 * 2x computers to feed the projector and scoreboard. Any OS, make or model that has an up-to-date OS and browser and can render medium-complexity WebGL scenes at approx 30 frames per second and connect to the same network as the HTC Vive PC. Most computers made since ~2015 will work for this, I use 2015 era MacBooks with no problem.
@@ -34,6 +37,8 @@ Let's start with hardware requirements before we get too excited about software 
 
 ## Step 2 - Software Setup
 Tested on Windows 10 PC with HTC Vive and Trackers. It's recommended that you run SteamVR Room Setup and set the play zone to match exactly the dimensions of your projector screen area.
+
+NOTE: Needs additional documentation especially with regards to Exokit installation.
 
 0) Clone this repo
 1) Open a command shell in this repo's /server directory and run:
