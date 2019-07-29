@@ -22,14 +22,15 @@ Here is a quick summary of the project motivations:
 
 ## Step 1 - Pre-Requisite Equipment
 Let's start with hardware requirements before we get too excited about software setup.
-* A PC with HTC Vive with system specs capable of supporting modern VR experiences.
-* A projector mounted about off the ground pointing downward at the floor that makes an approximately 6' (2m) diagonal screen projection. (You can get started without this, but it won't be complete without. [A versatile starter option is the Optoma ML750ST micro-projector with 1/4" tripod mounts](https://www.amazon.com/Optoma-ML750ST-Ultra-Compact-Projector-Enabled/dp/B07GWT1MCC) which allows you to mount it with something like [this arm](https://www.amazon.com/Manfrotto-244-Variable-Friction-Bracket/dp/B000J4FONU) and [this clamp](https://www.amazon.com/Manfrotto-035RL-Super-Clamp-Standard/dp/B0018LQVIA/).)
-* A separate computer to feed the projector. It doesn't have to be as performant as the PC but should be able to render medium-complexity WebGL scenes at approx 30 frames per second. Most MacBooks made since ~2015 will work for this.
-* HTC Vive tracker(s) and receivers. (link needed)
-* MTA 1:43 scale model bus toy. (link needed)
+* 1x PC with HTC Vive with system specs capable of supporting modern VR experiences.
+* 1x projector mounted about off the ground pointing downward at the floor that makes an approximately 6' (2m) diagonal screen projection. (You can get started without this, but it won't be complete without. [A versatile starter option is the Optoma ML750ST micro-projector with 1/4" tripod mounts](https://www.amazon.com/Optoma-ML750ST-Ultra-Compact-Projector-Enabled/dp/B07GWT1MCC) which allows you to mount it with something like [this arm](https://www.amazon.com/Manfrotto-244-Variable-Friction-Bracket/dp/B000J4FONU) and [this clamp](https://www.amazon.com/Manfrotto-035RL-Super-Clamp-Standard/dp/B0018LQVIA/).)
+* 2x computers to feed the projector and scoreboard. Any OS, make or model that has an up-to-date OS and browser and can render medium-complexity WebGL scenes at approx 30 frames per second and connect to the same network as the HTC Vive PC. Most computers made since ~2015 will work for this, I use 2015 era MacBooks with no problem.
+* 2x [HTC Vive Tracker and Receivers](https://www.amazon.com/VIVE-Virtual-Reality-System-Tracker-pc/dp/B0748ZY323/)
+* 2x [Daron brand 1:43 scale NY MTA model bus toy.](https://www.amazon.com/Daron-RT8468-MTA-11-Bus/dp/B00EVQJ5I2)
 * 1/4" thread cold shoe adapter and 2x thumb compatible tightening threads. (links needed)
 * 1/4" drill bit and drill (or another method to poke a 1/4" diameter hole in the bus toy plastic roof)
 * Optional - A reflective bright "screen" on the floor that matches the projected screen size. You can use a white carpet patch or white butcher (large format) paper. You can find carpet "remnants" that work well for this at local carpet stores for as low as $10.
+* 1x Big-screen TV or large monitor, separate from projector and HTC Vive PC to serve as a "scoreboard." Really a TV or monitor of any size will do, even just a laptop in a bind.
 
 ## Step 2 - Software Setup
 Tested on Windows 10 PC with HTC Vive and Trackers. It's recommended that you run SteamVR Room Setup and set the play zone to match exactly the dimensions of your projector screen area.
