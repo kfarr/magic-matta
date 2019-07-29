@@ -22,31 +22,35 @@ Here is a quick summary of the project motivations:
 
 ## Step 1 - Pre-Requisite Equipment
 Let's start with hardware requirements before we get too excited about software setup.
-* A PC with HTC Vive calibrated with room space
-* A projector mounted about 1.5 meters off the ground pointing downward at the floor. Measure the total size of the projected screen size in meters. (You can get started without this, but the project won't be complete without.)
+* A PC with HTC Vive with system specs capable of supporting modern VR experiences.
+* A projector mounted about off the ground pointing downward at the floor that makes an approximately 6' (2m) diagonal screen projection. (You can get started without this, but it won't be complete without. [A versatile starter option is the Optoma ML750ST micro-projector with 1/4" tripod mounts](https://www.amazon.com/Optoma-ML750ST-Ultra-Compact-Projector-Enabled/dp/B07GWT1MCC) which allows you to mount it with something like [this arm](https://www.amazon.com/Manfrotto-244-Variable-Friction-Bracket/dp/B000J4FONU) and [this clamp](https://www.amazon.com/Manfrotto-035RL-Super-Clamp-Standard/dp/B0018LQVIA/).)
+* A separate computer to feed the projector. It doesn't have to be as performant as the PC but should be able to render medium-complexity WebGL scenes at approx 30 frames per second. Most MacBooks made since ~2015 will work for this.
+* HTC Vive tracker(s) and receivers. (link needed)
+* MTA 1:43 scale model bus toy. (link needed)
+* 1/4" thread cold shoe adapter and 2x thumb compatible tightening threads. (links needed)
+* 1/4" drill bit and drill (or another method to poke a 1/4" diameter hole in the bus toy plastic roof)
 * Optional - A reflective bright "screen" on the floor that matches the projected screen size. You can use a white carpet patch or white butcher (large format) paper. You can find carpet "remnants" that work well for this at local carpet stores for as low as $10.
-* Optional - A separate computer to feed the projector or you can use the same Vive PC for this.
 
-## Hardware Setup
-* First choose an area within the HTC Vive lighthouse tracker boundaries for the projector:
-<img src="./docs/projector-placement-topdown.png" /><br />
-Top-down view: red represents the area of the projected screen. Screen can be anywhere within the lighthouse tracker bounds. It can be any dimensions (portrait or landscape aspect ratio) but make sure it is at a right angle to the lighthouse tracker bounds.
-* Mount the projector approx 1.5m off the floor facing down. Most projectors include a 1/4" tripod mount thread (female), you can get clamps with a 1/4" thread (male) to easily mount a mini projector on a table, attach to shelves, etc.
-<img src="./docs/projector-placement-side.jpg" /><br />
-Side view: suggested mounting heigh of 1.5m, depends on your projector's optics and desired screen size.
-* For recommendations on projector and mounting equipment, <a href="https://github.com/chaimgingold/Tabla/#recommended-camera-and-projector">see instructions from La Tabla, another cool projector based XR project</a>
+## Step 2 - Software Setup
+Tested on Windows 10 PC with HTC Vive and Trackers. It's recommended that you run SteamVR Room Setup and set the play zone to match exactly the dimensions of your projector screen area.
 
-## Software Setup
-* On a PC with HTC Vive, clone the repo, `npm install`, `npm start`
-* Use your favorite webvr enabled browser like Firefox or Supermedium to navigate to localhost:8080/server.html
-* Use the right Vive controller to position the virtual projector to match the real-life position and press the trigger.
-* On the same or another computer hooked up to the projector, use any browser (webvr support not required) to open [SERVER IP]:8080/client.html
-* Press the "init" button and use the on-screen adjustment buttons to tweak the alignment of the projector and the actual controller positions.
-* The bounds of this client projector are now defined.
+0) Clone this repo
+1) Open a command shell in this repo's /server directory and run:
+`npm run forever` (after running `npm install` once in the /server directory)
+2) Navigate back to this repo's root directory and run:
+`npm start` (after running `npm install` once in the repo root directory)
+3) Note the IP address when you run the above. Then open "/src/scene.html" and use this IP address to update the `url` value on the `broadcast` component on the `a-scene` entity toward the top of the file. Use port 12000. The attribute will look something like: `broadcast="url: http://192.168.1.1:12000"`
+4) Open another command shell in your exokit directory (after building exokit from repo HASH value e5d38a6ca5f2c5cc03f79e0b5ec8d0fcad6c142a) then run:
+`node . -x webvr http://localhost:3000` (replacing `localhost` with your local IP if necessary)
+5) On another machine attached to a projector pointed at the floor, use the IP address noted in (3) and open http://[localip]:3000/ in any browser. Click the Make Projector button on the screen. Use browser Fullscreen to stretch 3d view to full edges. Use the mouse to click, drag and "double drag" (using middle mouse button or two fingers touchpad) to adjust the projector's camera position while using the VR headset and tracked object to manually calibrate the projector.
 
-## Experimental
-Using exokit
-node . -x webvr http://localhost:8080/server.html
+NOTE: Break this step into 2 new ones such as: "Step 2 - Software Installation" and "Step 3 - Launching and Calibrating"
+
+## Step 4 - Game Play
+NOTE: To write
+
+## Step 5 - Mix Your Own Game
+NOTE: To write
 
 ## Future ideas
 * orthogonal camera instead of perspective, see notes in codebase
