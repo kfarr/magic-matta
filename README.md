@@ -58,6 +58,12 @@ NOTE: To write
 ## Step 5 - Mix Your Own Game
 NOTE: To write
 
+## How does it work?
+<img alt="Magic Matta setup diagram" src="./docs/Magic-Matta-Salon-Apr-24-Setup-Diagram.png" />
+<img alt="Magic Matta example layout photo" src="./docs/Magic-Matta-Salon-Apr-24-Example-Layout.jpg" />
+<img alt="Magic Matta extended setup" src="./docs/Magic-Matta-Salon-Apr-24-Extended-Setup.png" />
+
+
 ## Future ideas
 * orthogonal camera instead of perspective, see notes in codebase
 * more instructions for calibration
