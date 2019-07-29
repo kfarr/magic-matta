@@ -1,26 +1,25 @@
-# magic-matta 🏳️‍🌈
-The most up-to-date working code for magic-matta is here: https://github.com/kfarr/aframe-bus
+<img alt="Magic Matta" src="./assets/img/header-magic-matta.png" />
 
 ****
-Experiments to create a "magic carpet" type of experience in WebXR using A-Frame, HTC Vive and a projector. ("matta" is swedish for carpet or rug) This is a work in progress and does not work easily without significant manual configuration.
+<b>Magic Matta</b> renders "magic carpet" style games and experiences for children and children at heart using physical toy "controllers" tracked with HTC Vive Trackers combined with a top-down projector display.
+
+This requires special hardware to run, explained below in detail. This project attempts to use open-source tools such as WebXR and A-Frame where practical. (Why the name? "matta" is swedish for carpet or rug and Magic Carpet is a reserved trademark.) This is a work in progress and does not work easily without significant manual configuration.
 
 ## Why?
-* XR experience that kids can see without needing headset
+* XR experience that kids can see without needing headset. Try to create a fun toy that can also teach things
 * Experimenting with different input styles -- what can you do without buttons?
 * Try to have "multimodal" experience (allow simultaneous headset and projector use with synced scene)
-* Try to create a fun toy that can also teach things
-* HTC Vive instead of computer vision for higher accuracy and lower latency, easier for development to ignore CV complexities
+* Uses HTC Vive instead of computer vision for higher accuracy and lower latency of toy tracking making development simpler by ignoring CV complexities
 
-## Work in Progress Examples*
-<img height="40%" width="40%" src="./docs/bus-experiment-Dr8BgjVUcAED1vt.jpg" /> <img height="40%" width="40%" src="./docs/lego-street-DcTPKh0VAAIXgmg.jpg" />
-
-*Parts of these examples come from https://github.com/kfarr/aframe-bus and https://github.com/kfarr/streetmix3d. Requires manual configuration.
+## Pictures
+<img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_4.jpg" /> <img width="33%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_13.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_15.jpg" />
 
 # Project Setup Instructions
 
-## Equipment Needed
+## Step 1 - Pre-Requisite Equipment
+Let's start with hardware requirements before we get too excited about software setup.
 * A PC with HTC Vive calibrated with room space
-* A projector mounted about 1.5 meters off the ground pointing downward at the floor. Measure the total size of the projected screen size in meters.
+* A projector mounted about 1.5 meters off the ground pointing downward at the floor. Measure the total size of the projected screen size in meters. (You can get started without this, but the project won't be complete without.)
 * Optional - A reflective bright "screen" on the floor that matches the projected screen size. You can use a white carpet patch or white butcher (large format) paper. You can find carpet "remnants" that work well for this at local carpet stores for as low as $10.
 * Optional - A separate computer to feed the projector or you can use the same Vive PC for this.
 
