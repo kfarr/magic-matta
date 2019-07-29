@@ -1,8 +1,8 @@
 <img alt="Magic Matta" src="./assets/img/header-magic-matta.png" />
 
-<b>Magic Matta</b> renders "magic carpet" style games and experiences for children and children at heart using physical toy "controllers" tracked with HTC Vive Trackers combined with a top-down projector display.
+<b>Magic Matta</b> renders "magic carpet" style games and experiences for children (and children at heart) using physical toy "controllers" tracked with HTC Vive Trackers combined with a top-down projector display.
 
-This requires special hardware to run, explained below in detail. This project attempts to use open-source tools such as WebXR and A-Frame where practical. (Why the name? "matta" is swedish for carpet or rug and Magic Carpet is a reserved trademark.) This is a work in progress and does not work easily without significant manual configuration.
+This requires special hardware to run, explained below in detail. This project attempts to use open-source tools such as WebVR and A-Frame where practical. (Why the name? "matta" is swedish for carpet or rug and Magic Carpet is a reserved trademark.) This is a work in progress and does not work easily without significant manual configuration.
 
 ## Pictures
 [<img width="30%" src="./docs/MAGIC-MATTA-20190620_173429.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_13.jpg" /> <img width="30%" src="./docs/MAGIC-MATTA-gray-area-showcase_06192019_15.jpg" />](https://medium.com/@kfarr/creating-magic-matta-for-the-2019-1-gray-area-showcase-37df8f5d8aa0)
@@ -62,7 +62,6 @@ NOTE: To write
 <img alt="Magic Matta setup diagram" src="./docs/Magic-Matta-Salon-Apr-24-Setup-Diagram.png" />
 <img alt="Magic Matta example layout photo" src="./docs/Magic-Matta-Salon-Apr-24-Example-Layout.jpg" />
 <img alt="Magic Matta extended setup" src="./docs/Magic-Matta-Salon-Apr-24-Extended-Setup.png" />
-
 
 ## Future ideas
 * orthogonal camera instead of perspective, see notes in codebase
