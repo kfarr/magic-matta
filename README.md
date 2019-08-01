@@ -20,7 +20,7 @@ Here is a quick summary of the project motivations:
 
 # Project Setup Instructions
 
-## Step 1 - Pre-Requisite Equipment
+## Step 1 - Equipment Requirements and Setup
 Let's start with hardware requirements before we get too excited about software setup.
 
 * 1x PC with HTC Vive with system specs capable of supporting modern VR experiences.
@@ -33,22 +33,25 @@ Let's start with hardware requirements before we get too excited about software 
 * Optional - A reflective bright "screen" on the floor that matches the projected screen size. You can use a white carpet patch or white butcher (large format) paper. You can find carpet "remnants" that work well for this at local carpet stores for as low as $10.
 * 1x Big-screen TV or large monitor, separate from projector and HTC Vive PC to serve as a "scoreboard." Really a TV or monitor of any size will do, even just a laptop in a bind.
 
-## Step 2 - Software Setup
+## Step 2 - Software Installation and Setup
 Tested on Windows 10 PC with HTC Vive and Trackers. It's recommended that you run SteamVR Room Setup and set the play zone to match exactly the dimensions of your projector screen area.
 
-NOTE: Needs additional documentation especially with regards to Exokit installation.
+Make sure you have installed:
+- NodeJS (known good v12.2.0)
+- NPM (known good 6.9.0)
+- Exokit (known good version was built from source [e5d38a6](https://github.com/exokitxr/exokit/commit/e5d38a6ca5f2c5cc03f79e0b5ec8d0fcad6c142a), but newer versions should work too)
+- This repo - clone it!
+- Then run `npm install` twice: once in project base directory and once in /server
 
-0) Clone this repo
-1) Open a command shell in this repo's /server directory and run:
-`npm run forever` (after running `npm install` once in the /server directory)
-2) Navigate back to this repo's root directory and run:
-`npm start` (after running `npm install` once in the repo root directory)
-3) Note the IP address when you run the above. Then open "/src/scene.html" and use this IP address to update the `url` value on the `broadcast` component on the `a-scene` entity toward the top of the file. Use port 12000. The attribute will look something like: `broadcast="url: http://192.168.1.1:12000"`
-4) Open another command shell in your exokit directory (after building exokit from repo HASH value e5d38a6ca5f2c5cc03f79e0b5ec8d0fcad6c142a) then run:
-`node . -x webvr http://localhost:3000` (replacing `localhost` with your local IP if necessary)
-5) On another machine attached to a projector pointed at the floor, use the IP address noted in (3) and open http://[localip]:3000/ in any browser. Click the Make Projector button on the screen. Use browser Fullscreen to stretch 3d view to full edges. Use the mouse to click, drag and "double drag" (using middle mouse button or two fingers touchpad) to adjust the projector's camera position while using the VR headset and tracked object to manually calibrate the projector.
+## Step 3 - Launching and Calibrating
+I made a [simple batch file which does some of the below for you](https://github.com/kfarr/magic-matta/blob/master/launch.bat), and you can even link it to a nifty desktop shortcut icon!
 
-NOTE: Break this step into 2 new ones such as: "Step 2 - Software Installation" and "Step 3 - Launching and Calibrating"
+1) Open a command prompt in this repo's /server and run: `npm run forever`
+2) Navigate back to this repo's root directory and run: `npm start`
+3) Note the IP address when you run step #2!
+4) Use a text editor to open "/src/scene.html". Update the `url` value on the `broadcast` component on the `a-scene` entity toward the top of the file with the IP address you just noted and append port 12000. The attribute will look something like this: `broadcast="url: http://192.168.1.1:12000"` (TODO: set broadcast url to hostname:12000 via js after scene is loaded)
+5) Open another command shell in your exokit [e5d38a6](https://github.com/exokitxr/exokit/commit/e5d38a6ca5f2c5cc03f79e0b5ec8d0fcad6c142a) directory then run: `node . -x webvr http://localhost:3000` (replacing `localhost` with your local IP if necessary)
+6) On another machine attached to a projector pointed at the floor, use the IP address noted in (3) and open http://[localip]:3000/ in any browser. Click the Make Projector button on the screen. Use browser Fullscreen to stretch 3d view to full edges. Use the mouse to click, drag and "double drag" (using middle mouse button or two fingers touchpad) to adjust the projector's camera position while using the VR headset and tracked object to manually calibrate the projector.
 
 ## Step 4 - Game Play
 NOTE: To write
