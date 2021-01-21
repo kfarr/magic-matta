@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/ngokevin/webvr-multiuser-server#readme",
   "dependencies": {
-    "socket.io": "^1.4.6",
+    "socket.io": "^2.4.0",
     "forever": "^0.15.1"
   }
 }
